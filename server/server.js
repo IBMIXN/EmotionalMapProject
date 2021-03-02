@@ -174,7 +174,7 @@ app.get('/map', (req, res) => {
   const map_data = {
     counties: {
       // list of all counties
-      'County Durham': {
+      'Durham': {
         emotions: {
           joy: 0.7,
           fear: 0.2,

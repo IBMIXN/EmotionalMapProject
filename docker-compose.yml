@@ -4,8 +4,8 @@ services:
   server:
     build: ./server
     volumes:
-      - ./server/:/usr/app
-      - /usr/app/node_modules
+      - ./server/:/home/node/app
+      - /home/node/app/node_modules
     image: "emotionmap-backend"
     ports:
       - "8080:8080"

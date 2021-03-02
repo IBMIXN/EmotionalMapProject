@@ -5,7 +5,7 @@ WORKDIR /usr/app/client/
 # Copy node files
 COPY client/package*.json ./
 
-RUN npm ci --production
+RUN npm ci
 
 # Copy client code
 COPY client/ ./
@@ -15,8 +15,7 @@ RUN npm run build
 
 
 # Backend
-FROM node:12.21-alpine
-
+FROM nginx:1.19.0-alpine
 # Copy client build into /usr/app/client/build on this container
 WORKDIR /usr/app/
 COPY --from=client /usr/app/client/build/ ./client/build/
@@ -30,8 +29,8 @@ RUN npm ci --production
 COPY server/ ./
 
 # Set port environment variable
-ENV PORT 8000
-EXPOSE 8000
+ENV PORT 8080
+EXPOSE 8080
 
 # Run the express server
 CMD ["npm", "start"]

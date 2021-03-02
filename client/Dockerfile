@@ -1,16 +1,19 @@
 FROM node:12.21-alpine
 
 LABEL description="Serve client files during development"
+RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
 
-WORKDIR /usr/app
+WORKDIR /home/node/app
 
 # Copy in node files and get node modules
 COPY package*.json ./
 
+USER node
+
 RUN npm ci
 
 # Copy client files onto server
-COPY . .
+COPY --chown=node:node . .
 
 # Expose the dev port
 EXPOSE 3000
