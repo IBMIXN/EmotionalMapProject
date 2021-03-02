@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  server:
+    build: ./server
+    volumes:
+      - ./server/:/usr/app
+      - /usr/app/node_modules
+    image: "emotionmap-backend"
+    ports:
+      - "8080:8080"
+    environment:
+      NODE_ENV: development
+      HOKIDAR_USEPOLLING: 'true'
+      
+  client:
+    build: ./client
+    volumes:
+      - ./client/:/usr/app
+      - /usr/app/node_modules
+    image: "emotionmap-client"
+    depends_on:
+      - server
+    environment:
+      NODE_ENV: development
+    ports:
+      - "3000:3000"

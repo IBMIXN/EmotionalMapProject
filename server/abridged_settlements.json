@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Luton",
+        "geocode": "51.891749018068246,-0.44872283935546875,7mi",
+        "sample_size": 10,
+        "county": "Bedfordshire"
+    },
+    {
+        "name": "Bedford",
+        "geocode": "52.13664902426816,-0.46417236328125,5mi",
+        "sample_size": 10,
+        "county": "Bedfordshire"
+    },
+    {
+        "name": "Reading",
+        "geocode": "51.452723257688525,-0.96405029296875,6mi",
+        "sample_size": 5,
+        "county": "Berkshire"
+    },
+    {
+        "name": "Slough",
+        "geocode": "51.5091698216777,-0.605621337890625,4mi",
+        "sample_size": 5,
+        "county": "Berkshire"
+    },
+    {
+        "name": "Bracknell",
+        "geocode": "51.408736372684956,-0.7537651062011719,3mi",
+        "sample_size": 0,
+        "county": "Berkshire"
+    },
+    {
+        "name": "Milton Keynes",
+        "geocode": "52.032112494805205,-0.7547950744628906,7mi",
+        "sample_size": 0,
+        "county": "Buckinghamshire"
+    },
+    {
+        "name": "High Wycombe",
+        "geocode": "51.63112458264203,-0.7467269897460938,4mi",
+        "sample_size": 150,
+        "county": "Buckinghamshire"
+    },
+    {
+        "name": "Aylesbury",
+        "geocode": "51.81413351481032,-0.8092117309570312,4mi",
+        "sample_size": 280,
+        "county": "Buckinghamshire"
+    }
+]
