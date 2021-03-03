@@ -23,6 +23,6 @@ export interface Emotions {
 }
 
 export function getEmotionData(): Promise<EmotionData> {
-    return fetch('/map')
+    return fetch('/api/map')
       .then(data => data.json())
   }

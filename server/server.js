@@ -182,7 +182,7 @@ const getLeaderboardData = () => {
 };
 
 // path for accessing map data
-app.get('/map', (req, res) => {
+app.get('/api/map', (req, res) => {
 
   // call getMapData to get data
   // unprocessed_data = getMapData()

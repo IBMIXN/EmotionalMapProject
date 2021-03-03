@@ -2,14 +2,18 @@ version: '3'
 
 services:
   server:
-    build: .
+    build: 
+      context: .
+      dockerfile: Dockerfile.api
     env_file:
       - api-credentials.env
       - mongo-variables.env
     environment:
       NODE_ENV: production
   caddy:
-    image: caddy:2-alpine
+    build: 
+      context: .
+      dockerfile: Dockerfile.web
     restart: always
     ports:
       - "443:443"

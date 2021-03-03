@@ -1,0 +1,21 @@
+FROM node:14-alpine as client
+
+WORKDIR /usr/app/client/
+
+# Copy node files
+COPY client/package*.json ./
+
+RUN npm ci
+
+# Copy client code
+COPY client/ ./
+
+# Build client
+RUN npm run build
+
+# Setup Caddy
+FROM caddy:2-alpine
+
+# Copy client build into /var/www/html/emotionmap.uk on this container
+COPY --from=client /usr/app/client/build/ /var/www/html/emotionmap.uk
+COPY ./Caddyfile /etc/Caddyfile

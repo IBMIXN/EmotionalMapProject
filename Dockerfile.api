@@ -1,0 +1,16 @@
+FROM node:14-alpine
+
+# Move into server folder and copy node files
+WORKDIR /usr/app/server/
+COPY server/package*.json ./
+# Install deps for server
+RUN npm ci --production
+# Copy server code to container
+COPY server/ ./
+
+# Set port environment variable
+ENV PORT 8080
+EXPOSE 8080
+
+# Run the express server
+CMD ["npm", "start"]

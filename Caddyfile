@@ -1,3 +1,20 @@
 emotionmap.uk {
-  reverse_proxy /* server:8080
+  # set the root directory
+  root * /var/www/html/emotionmap.uk
+  # Compress if possible
+  encode gzip zstd
+  
+  reverse_proxy /api* server:8080
+
+  @notAPI {
+      not {
+          path /api*
+      }
+      file {
+        try_files {path} {path}/ /index.html
+      }
+  }
+  rewrite @notAPI {http.matchers.file.relative}
+
+  file_server
 }
