@@ -272,7 +272,7 @@ app.get('/leaderboard', (req, res) => {
 });
 
 
-const CLIENT_BUILD_PATH = path.join(__dirname, '../../client/build');
+const CLIENT_BUILD_PATH = path.join(__dirname, '../client/build');
 app.use(express.static(CLIENT_BUILD_PATH));
 
 app.get('*', function (request, response) {

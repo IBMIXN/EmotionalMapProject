@@ -15,7 +15,8 @@ RUN npm run build
 
 
 # Backend
-FROM nginx:1.19.0-alpine
+FROM node:12.21-alpine
+
 # Copy client build into /usr/app/client/build on this container
 WORKDIR /usr/app/
 COPY --from=client /usr/app/client/build/ ./client/build/
