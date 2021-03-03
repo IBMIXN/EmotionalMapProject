@@ -182,67 +182,9 @@ const getLeaderboardData = () => {
 };
 
 // path for accessing map data
-app.get('/map', (req, res) => {
-
-  // call getMapData to get data
-  // unprocessed_data = getMapData()
-
-  // Then process this data to get it in the correct format as shown below
-
-  // This is placeholder JSON data
-  const map_data = {
-    counties: {
-      // list of all counties
-      'Durham': {
-        emotions: {
-          joy: 0.7,
-          fear: 0.2,
-          anger: 0.1,
-          sadness: 0.2,
-        },
-        settlements: {
-          'City of Durham': {
-            joy: 0.7,
-            fear: 0.2,
-            anger: 0.1,
-            sadness: 0.2,
-          },
-          'Bishop Auckland': {
-            joy: 0.3,
-            fear: 0.3,
-            anger: 0.8,
-            sadness: 0.1,
-          },
-        },
-        // within each county is the cities we chose
-      },
-      Berkshire: {
-        emotions: {
-          joy: 0.0,
-          fear: 0.9,
-          anger: 0.9,
-          sadness: 0.9,
-        },
-        settlements: {
-          Reading: {
-            joy: 0.0,
-            fear: 0.9,
-            anger: 0.9,
-            sadness: 0.9,
-          },
-          Newbury: {
-            joy: 0.9,
-            fear: 0.1,
-            anger: 0.1,
-            sadness: 0.1,
-          },
-        },
-      },
-      // ...
-    },
-  };
-  // Send this JSON data to the web page to be displayed
-  res.status(200).json(map_data);
+app.get('/map', async (req, res) => {
+  const counties = await models.County.find();
+  res.send(counties);
 });
 
 // path for getting pie chart data
@@ -288,12 +230,4 @@ app.get('/leaderboard', (req, res) => {
 
   // send the data to the web page
   res.status(200).json(leaderboard_data);
-});
-
-
-const CLIENT_BUILD_PATH = path.join(path.resolve(), '../client/build');
-app.use(express.static(CLIENT_BUILD_PATH));
-
-app.get('*', function (request, response) {
-  response.sendFile(path.join(CLIENT_BUILD_PATH, 'index.html'));
 });
