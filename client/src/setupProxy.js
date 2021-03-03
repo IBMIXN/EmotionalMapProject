@@ -1,5 +1,5 @@
-const proxy = require('http-proxy-middleware');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 module.exports = function(app) {
-  app.use(proxy('/api', { target: 'http://server:8080/' }));
+  app.use(createProxyMiddleware('/api', { target: 'http://server:8080/', pathRewrite: {'^/api' : ''}}));
 };

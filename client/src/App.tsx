@@ -7,9 +7,8 @@ import Stats from "./stats";
 
 
 export const App = (): JSX.Element => {
-  const showSidebar = useBreakpointValue({ base: false, md: true })
+  const showSidebar = useBreakpointValue({ base: false, md: true }) ?? true;
 
-  console.log(showSidebar);
   if (showSidebar) {
     return <Flex h="100vh">
       <Box w="350px" h="100%" style={{ position: 'fixed' }} boxShadow="xl">
