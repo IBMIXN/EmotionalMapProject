@@ -1,19 +1,20 @@
 export interface County {
-  name: String;
-  emotions:    Emotions;
-  settlements: Settlements;
+  name: string;
+  joy: number;
+  sadness: number;
+  anger: number;
+  fear: number;
+  settlements: Settlements[];
 }
 
 export interface Settlements {
-  [name: string] : Emotions
+  name: string;
+  joy: number;
+  sadness: number;
+  anger: number;
+  fear: number;
 }
 
-export interface Emotions {
-  joy:     number;
-  fear:    number;
-  anger:   number;
-  sadness: number;
-}
 
 export function getEmotionData(): Promise<County[]> {
     return fetch('/api/map')

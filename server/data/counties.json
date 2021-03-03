@@ -1,0 +1,19 @@
+{
+    "Cornwall": [
+        {
+            "name": "Helston",
+            "geocode": "-5.267772674560547,50.10538674287487,3mi",
+            "sample_size": 50
+        },
+        {
+            "name": "Penzance",
+            "geocode": "-5.538825988769531,50.12123848233564,4mi",
+            "sample_size": 50
+        },
+        {
+            "name": "Falmouth",
+            "geocode": "-5.092506408691406,50.16414392753407,4mi",
+            "sample_size": 50
+        }
+    ]
+}

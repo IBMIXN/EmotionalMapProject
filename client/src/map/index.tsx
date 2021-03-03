@@ -28,7 +28,7 @@ export const Map = (props: MapProps): JSX.Element => {
   }, [setEmotionData])
 
   const [tooltipContent, setTooltipContent] = React.useState("");
-  const [selectedCounty, setSelectedCounty] = React.useState("");
+  const [selectedCountyName, setSelectedCountyName] = React.useState("");
 
   const bg = useColorModeValue("white", "gray.700");
 
@@ -47,7 +47,7 @@ export const Map = (props: MapProps): JSX.Element => {
     }
   })();
 
-  const colourScale = scaleLinear<string>().domain([-0.2, 1]).range(["white", colour]);
+  const colourScale = scaleLinear<string>().domain([-0.2, 0.7]).range(["white", colour]);
 
   let selectionHeader = () => {
     if (view === View.STRONGEST) {
@@ -67,6 +67,7 @@ export const Map = (props: MapProps): JSX.Element => {
   }
 
   if (emotionData !== undefined) {
+    const selectedCounty = emotionData.find((county) => county.name == selectedCountyName)
     return (
       <Box h="100%">
         <div style={{ height: "100%", width: "100%" }}>
@@ -75,39 +76,44 @@ export const Map = (props: MapProps): JSX.Element => {
       </Text>}
           <ReactTooltip>{tooltipContent}</ReactTooltip>
           {selectedCounty && <Box boxShadow="lg" p="6" rounded="md" bg={bg} style={{ width: "400px", right: "10px", top: "10px", position: "absolute" }}>
-            <Heading mb="2" size="md">{selectedCounty}</Heading>
+            <Heading mb="2" size="md">{selectedCounty.name}</Heading>
             <Box mb="1">{selectionHeader()}
             </Box>
-            {/* {emotionData.counties[selectedCounty] && <React.Fragment>
-              {Object.keys(emotionData.counties[selectedCounty].settlements).map((name) => {
-                let emotions = emotionData.counties[selectedCounty].settlements[name];
+            {selectedCounty && <React.Fragment>
+              {selectedCounty.settlements.map((settlement) => {
+                const emotions = {
+                  [Emotion.JOY]: settlement.joy,
+                  [Emotion.FEAR]: settlement.fear,
+                  [Emotion.ANGER]: settlement.anger,
+                  [Emotion.SADNESS]: settlement.sadness
+                }
                 if (view === View.STRONGEST) {
                   const maxKey = Object.entries(emotions).reduce((a, b) => a[1] > b[1] ? a : b)[0]
                   switch (maxKey) {
                     case Emotion.FEAR:
-                      return <Text><strong>{name}</strong>: Fear</Text>
+                      return <Text><strong>{settlement.name}</strong>: Fear</Text>
                     case Emotion.ANGER:
-                      return <Text><strong>{name}</strong>: Anger</Text>
+                      return <Text><strong>{settlement.name}</strong>: Anger</Text>
                     case Emotion.SADNESS:
-                      return <Text><strong>{name}</strong>: Sadness</Text>
+                      return <Text><strong>{settlement.name}</strong>: Sadness</Text>
                     default:
-                      return <Text><strong>{name}</strong>: Joy</Text>
+                      return <Text><strong>{settlement.name}</strong>: Joy</Text>
                   }
                 } else {
                   switch (emotion) {
                     case Emotion.FEAR:
-                      return <Text><strong>{name}</strong>: {(emotions.fear * 100).toFixed(0)}%</Text>
+                      return <Text><strong>{settlement.name}</strong>: {(emotions.fear * 100).toFixed(0)}%</Text>
                     case Emotion.ANGER:
-                      return <Text><strong>{name}</strong>: {(emotions.anger * 100).toFixed(0)}%</Text>
+                      return <Text><strong>{settlement.name}</strong>: {(emotions.anger * 100).toFixed(0)}%</Text>
                     case Emotion.SADNESS:
-                      return <Text><strong>{name}</strong>: {(emotions.sadness * 100).toFixed(0)}%</Text>
+                      return <Text><strong>{settlement.name}</strong>: {(emotions.sadness * 100).toFixed(0)}%</Text>
                     default:
-                      return <Text><strong>{name}</strong>: {(emotions.joy * 100).toFixed(0)}%</Text>
+                      return <Text><strong>{settlement.name}</strong>: {(emotions.joy * 100).toFixed(0)}%</Text>
                   }
                 }
               })
               }
-            </React.Fragment>} */}
+            </React.Fragment>}
           </Box>
           }
           <ComposableMap data-tip=""
@@ -135,7 +141,12 @@ export const Map = (props: MapProps): JSX.Element => {
                         });
                         let colour = "#FFFFFF";
                         if (county) {
-                          const emotions = county.emotions
+                          const emotions = {
+                            [Emotion.JOY]: county.joy,
+                            [Emotion.FEAR]: county.fear,
+                            [Emotion.ANGER]: county.anger,
+                            [Emotion.SADNESS]: county.sadness
+                          }
                           const maxKey = Object.entries(emotions).reduce((a, b) => a[1] > b[1] ? a : b)[0]
                           console.log(maxKey);
                           if (view === View.STRONGEST) {
@@ -195,7 +206,7 @@ export const Map = (props: MapProps): JSX.Element => {
                             }}
                             onClick={() => {
                               if (props.onClickAction)
-                                setSelectedCounty(name);
+                                setSelectedCountyName(name);
                             }}
                             stroke="#aaaaaa"
                             fill={colour}

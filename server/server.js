@@ -1,20 +1,10 @@
 // import dependencies and initialize express
 import express from "express";
-import path from "path";
 import bodyParser from "body-parser";
 import schedule from "node-schedule";
-import mongoose from "mongoose";
-import fetch from "node-fetch"; // used to access the Twitter API
-import fs from "fs"; // used to write JSON files for Tweets and hashtags.
 import models, { connectDb } from './models/index.js';
 
-// Temp fix for using require
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
-
-// We may stop using this once we can feed them straight into the tone analyser
-const settlements = require('./abridged_settlements.json');
-// change to 'settlements.json' once the file has been completed
+import { refresh } from "./processing/index.js";
 const app = express();
 
 // enable parsing of http request body
@@ -33,133 +23,21 @@ connectDb().then(() => {
   
   // Schedule getTweets every day at midnight
   schedule.scheduleJob('0 0 * * *', () => {
-    getTweets();
+    refresh();
   });
 })
 
-// functions
-async function getTweets() {
-  var tweet_texts = {};
-  var hashtags = {};
 
-  const reqHeaders = new fetch.Headers([['authorization', `Bearer ${process.env.TWITTER_API_BEARER_TOKEN}` ]]);
+// path for accessing emotion data
+app.get('/counties', async (req, res) => {
+  const counties = await models.County.find();
+  res.send(counties);
+});
 
-  const reqInit = {
-    method: 'GET',
-    headers: reqHeaders,
-  };
-  for (var key in settlements) {
-    let name = settlements[key].name;
-    tweet_texts[name] = [];
-    /* the text of Tweets are stored in multiple arrays
-       that are keyed by the settlement name */
-    let page_size = Math.min(settlements[key].sample_size, 100);
-    /* this cannot change for repeated requests for the same settlement,
-       so if more than 100 Tweets are needed, all requests will be for
-       100 Tweets but not all Tweets from the response will be stored */
-    let url = 'https://api.twitter.com/1.1/search/tweets.json';
-    let query = `?result_type=recent&geocode=${settlements[key].geocode} + 
-    &count=${page_size}&include_entities=true&tweet_mode=extended&lang=en`;
-    // query is updated in the response of the first request
-    let sample_remaining = settlements[key].sample_size;
-    /* multiple requests need to be sent if more than 100 Tweets are
-       required for a settlement */
-    let attempts_remaining = 2; // two attempts per individual request
-    while (sample_remaining > 0) {
-      try {
-        // send a new request to the Twitter API
-        const response = await fetch(url + query, reqInit);
-        const body = await response.text();
-        const results = JSON.parse(body);
-
-        // check that the response contains Tweets (before the query is changed)
-        if (results['statuses'].length === 0) {
-          throw new Error('The response contained 0 Tweets.');
-        }
-
-        /* extract the Tweets, hashtags and the query
-        for the next page of results from results */
-
-        /* change the number of Tweets to fetch if the last request needs
-        fewer than 100 */
-        page_size = Math.min(sample_remaining - 100, 100);
-        // override the provided count parameter by placing this earlier
-        query = `?count=${page_size}&` +
-          results['search_metadata']['next_results'].slice(1) +
-          '&tweet_mode=extended';
-        // the query it provides loses the tweet_mode parameter so reinstate it
-
-        // for each Tweet from this settlement
-        for (let status in results['statuses']) {
-          // get the entire Tweet object
-          let status_data = results['statuses'][status];
-          let tweet_text = '';
-
-          if (status_data.hasOwnProperty('retweeted_status')) {
-            // then it is a retweet
-            tweet_text = status_data['retweeted_status']['full_text'];
-          } else {
-            // then it is an original tweet
-            tweet_text = status_data['full_text'];
-          }
-          // now store the Tweet text in the settlement's array
-          tweet_texts[name].push(tweet_text);
-
-          // for each hashtag in the Tweet
-          for (let hashtag in status_data['entities']['hashtags']) {
-            let hashtag_text =
-              status_data['entities']['hashtags'][hashtag]['text'];
-            if (hashtags[hashtag_text] === undefined) {
-              // if it has not yet been registered
-              hashtags[hashtag_text] = 1; // add it to the list of hashtags
-            } else {
-              // if it has already been registered
-              hashtags[hashtag_text] += 1; // count another occurence of it
-            }
-          }
-
-          sample_remaining -= 1;
-          if (sample_remaining <= 0) {
-            break;
-            /* if sample_size > 100, the last request will still be for
-            100 Tweets, but we might not want to store all of them,
-            so break as soon as the desired number is met */
-          }
-        }
-        // this request succeeded
-        attempts_remaining = 2; // Now reset the attempts for the next request
-      } catch (e) {
-        console.log(`Tweets could not by fetched for ${name}. Error: ${e}`);
-        attempts_remaining -= 1;
-        if (attempts_remaining === 0) {
-          break;
-          /* the last request for this settlement failed twice.
-          Move on to the next settlement -
-          we can't try the next page for this settlement because
-          that hasn't been returned in the last request */
-        }
-      }
-    }
-  }
-  // after data for all settlements has been collected, store them in files:
-  let jsonString = JSON.stringify(tweet_texts);
-  fs.writeFile('./tweets.json', jsonString, err => {
-    if (err) {
-      console.log('Error writing file tweets.json', err);
-    } else {
-      console.log('Successfully wrote file tweets.json');
-    }
-  });
-  jsonString = JSON.stringify(hashtags);
-  fs.writeFile('./hashtags.json', jsonString, err => {
-    if (err) {
-      console.log('Error writing file hashtags.json', err);
-    } else {
-      console.log('Successfully wrote file hashtags.json');
-    }
-  });
-  return;
-}
+app.get('/refresh', async (req, res) => {
+  refresh(models);
+  return "Refreshing - check logs"
+});
 
 const getMapData = () => {
   // code to access data from database for use in map
