@@ -30,3 +30,5 @@ yarn-error.log*
 .envrc
 
 *tweets.json
+mongo-variables.env
+api-credentials.env

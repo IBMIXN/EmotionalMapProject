@@ -7,12 +7,12 @@ const tweet_data = require("./tweets.json"); //remove this and replace it with t
 
 const credentials = require('./tone-analyzer-credentials.json'); //Credentials
 
-const apikey = credentials["apikey"];
+const apikey = process.env.TONE_ANALYZER_KEY;
 
 console.log(apikey)
 console.log("api read")
 
-const url = credentials["url"];
+const url = process.env.TONE_ANALYZER_URL
 
 console.log(url)
 console.log("url set up")

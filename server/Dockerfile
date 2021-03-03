@@ -1,4 +1,4 @@
-FROM node:12.21-alpine
+FROM node:14-alpine
 
 LABEL description="Serve server for Emotion Map during development"
 

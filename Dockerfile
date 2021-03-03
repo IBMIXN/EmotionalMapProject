@@ -1,4 +1,4 @@
-FROM node:12.21-alpine as client
+FROM node:14-alpine as client
 
 WORKDIR /usr/app/client/
 
@@ -15,7 +15,7 @@ RUN npm run build
 
 
 # Backend
-FROM node:12.21-alpine
+FROM node:14-alpine
 
 # Copy client build into /usr/app/client/build on this container
 WORKDIR /usr/app/

@@ -1,13 +1,17 @@
 // import dependencies and initialize express
-const express = require('express');
-const path = require('path');
-const bodyParser = require('body-parser');
-const schedule = require('node-schedule');
-/* eslint-disable no-unused-vars */
+import express from "express";
+import path from "path";
+import bodyParser from "body-parser";
+import schedule from "node-schedule";
+import mongoose from "mongoose";
+import fetch from "node-fetch"; // used to access the Twitter API
+import fs from "fs"; // used to write JSON files for Tweets and hashtags.
+import models, { connectDb } from './models/index.js';
 
+// Temp fix for using require
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 
-const fetch = require('node-fetch'); // used to access the Twitter API
-const fs = require('fs'); // used to write JSON files for Tweets and hashtags.
 // We may stop using this once we can feed them straight into the tone analyser
 const settlements = require('./abridged_settlements.json');
 // change to 'settlements.json' once the file has been completed
@@ -17,13 +21,28 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// start node server after connecting to database
+const PORT = process.env.PORT || 8080;
+const HOST = '0.0.0.0';
+connectDb().then(() => {
+  console.log(`Database connected`);
+
+  app.listen(PORT, HOST, () => {
+    console.log(`API available http://${HOST}:${PORT}`);
+  });
+  
+  // Schedule getTweets every day at midnight
+  schedule.scheduleJob('0 0 * * *', () => {
+    getTweets();
+  });
+})
+
 // functions
 async function getTweets() {
   var tweet_texts = {};
   var hashtags = {};
 
-  // TODO: add key
-  const reqHeaders = new fetch.Headers([['authorization', 'Bearer ' ]]);
+  const reqHeaders = new fetch.Headers([['authorization', `Bearer ${process.env.TWITTER_API_BEARER_TOKEN}` ]]);
 
   const reqInit = {
     method: 'GET',
@@ -272,24 +291,9 @@ app.get('/leaderboard', (req, res) => {
 });
 
 
-const CLIENT_BUILD_PATH = path.join(__dirname, '../client/build');
+const CLIENT_BUILD_PATH = path.join(path.resolve(), '../client/build');
 app.use(express.static(CLIENT_BUILD_PATH));
 
 app.get('*', function (request, response) {
   response.sendFile(path.join(CLIENT_BUILD_PATH, 'index.html'));
 });
-
-// start node server
-const PORT = process.env.PORT || 8080;
-const HOST = '0.0.0.0';
-
-app.listen(PORT, HOST, () => {
-  console.log(`API available http://${HOST}:${PORT}`);
-});
-
-// this will trigger the function regularly on the specified interval
-schedule.scheduleJob('0 0 * * *', () => {
-  getTweets();
-});
-
-module.exports = app;

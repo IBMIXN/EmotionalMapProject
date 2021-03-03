@@ -3,6 +3,9 @@ version: '3'
 services:
   server:
     build: ./server
+    env_file:
+      - api-credentials.env
+      - mongo-variables.env
     volumes:
       - ./server/:/home/node/app
       - /home/node/app/node_modules
@@ -25,3 +28,14 @@ services:
       NODE_ENV: development
     ports:
       - "3000:3000"
+  mongodb:
+    image: mongo:latest
+    env_file:
+      - mongo-variables.env
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:
