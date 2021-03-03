@@ -1,12 +1,5 @@
-export interface EmotionData {
-  counties: Counties;
-}
-
-export interface Counties {
-  [name: string] : County
-}
-
 export interface County {
+  name: String;
   emotions:    Emotions;
   settlements: Settlements;
 }
@@ -22,7 +15,7 @@ export interface Emotions {
   sadness: number;
 }
 
-export function getEmotionData(): Promise<EmotionData> {
+export function getEmotionData(): Promise<County[]> {
     return fetch('/api/map')
       .then(data => data.json())
   }
