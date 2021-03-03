@@ -1,0 +1,267 @@
+{
+	"Leicestershire": [
+		{
+			"name": "Leicester",
+			"geocode": "-1.13983154296875,52.63472980703678,5mi",
+			"sample_size": 100
+		},
+		{
+			"name": "Melton Mowbray",
+			"geocode": "-0.8881759643554688,52.766838803062264,3mi",
+			"sample_size": 80
+		},
+		{
+			"name": "Hinckley",
+			"geocode": "-1.3712310791015625,52.546295697522886,2mi",
+			"sample_size": 80
+		},
+		{
+			"name": "Loughborough",
+			"geocode": "-1.2275505065917969,52.76569626826941,2mi",
+			"sample_size": 80
+		}
+	],
+	"Hampshire": [
+		{
+			"name": "Farnborough",
+			"geocode": "-0.791015625,51.276306751112685,3mi",
+			"sample_size": 100
+		},
+		{
+			"name": "Basingstoke",
+			"geocode": "-1.0914230346679685,51.26578177595631,5mi",
+			"sample_size": 100
+		},
+		{
+			"name": "Southampton",
+			"geocode": "-1.4134597778320312,50.92467892226281,6mi",
+			"sample_size": 100
+		}
+	],
+	"West Sussex": [
+		{
+			"name": "Crawley",
+			"geocode": "-0.18230438232421875,51.1134374475325,3mi",
+			"sample_size": 100
+		},
+		{
+			"name": "Worthing",
+			"geocode": "-0.38555145263671875,50.83846776477957,4mi",
+			"sample_size": 90
+		},
+		{
+			"name": "Chichester",
+			"geocode": "-0.775909423828125,50.84063582806037,2mi",
+			"sample_size": 90
+		}
+	],
+	"East Sussex": [
+		{
+			"name": "Eastbourne",
+			"geocode": " 0.20153045654296875,50.82090273956621,6mi",
+			"sample_size": 100
+		},
+		{
+			"name": "Hastings",
+			"geocode": "0.5675125122070312,50.87487785990267,3mi",
+			"sample_size": 90
+		}
+	],
+	"Devon": [
+		{
+			"name": "Exeter",
+			"geocode": "-3.53485107421875,50.72254683363231,5mi",
+			"sample_size": 100
+		},
+		{
+			"name": "Barnstaple",
+			"geocode": "-4.0594482421875,51.08109643660297,3mi",
+			"sample_size": 100
+		}
+	],
+	"Cornwall": [
+		{
+			"name": "Helston",
+			"geocode": "-5.267772674560547,50.10538674287487,3mi",
+			"sample_size": 100
+		},
+		{
+			"name": "Penzance",
+			"geocode": "-5.538825988769531,50.12123848233564,4mi",
+			"sample_size": 100
+		},
+		{
+			"name": "Falmouth",
+			"geocode": "-5.092506408691406,50.16414392753407,4mi",
+			"sample_size": 100
+		}
+	],
+	"Somerset": [
+		{
+			"name": "Bridgwater",
+			"geocode": "-2.9944610595703125,51.127660326365735,3mi",
+			"sample_size": 100
+		},
+		{
+			"name": "Yeovil",
+			"geocode": "-2.6717376708984375,50.95366890171828,3mi",
+			"sample_size": 90
+		},
+		{
+			"name": "Frome",
+			"geocode": "-2.3380279541015625,51.22924786327828,3mi",
+			"sample_size": 80
+		}
+	],
+	"Bristol": [
+		{
+			"name": "Bristol",
+			"geocode": "-2.5807571411132812,51.46598592502469,3mi",
+			"sample_size": 100
+		}
+	],
+	"Gloucestershire": [
+		{
+			"name": "Gloucester",
+			"geocode": "-2.252197265625,51.865044036043194,5mi",
+			"sample_size": 100
+		},
+		{
+			"name": "Cheltenham",
+			"geocode": "-2.086029052734375,51.90573101213574,5mi",
+			"sample_size": 80
+		}
+	],
+	"Dyfed": [
+		{
+			"name": "Pembroke",
+			"geocode": "-4.9266815185546875,51.69001067254529,5mi",
+			"sample_size": 100
+		}
+	],
+	"Gwynedd": [
+		{
+			"name": "Bangor",
+			"geocode": "-4.1287994384765625,53.2002745391826,3mi",
+			"sample_size": 100
+		},
+		{
+			"name": "Porthmadog",
+			"geocode": "-4.110603332519531,52.92753276309978,3mi",
+			"sample_size": 80
+		}
+	],
+	"Clwyd": [
+		{
+			"name": "Buckley",
+			"geocode": "-3.0809783935546875,53.166121861034526,5mi",
+			"sample_size": 100
+		},
+		{
+			"name": "Rhyl",
+			"geocode": "-3.4843826293945312,53.29230993420693,3mi",
+			"sample_size": 80
+		}
+	],
+	"Merseyside": [
+		{
+			"name": "Liverpool",
+			"geocode": "-2.9841613769531246,53.40502927719682,5mi",
+			"sample_size": 100
+		},
+		{
+			"name": "St Helens",
+			"geocode": "-2.745208740234375,53.453713656852536,5mi",
+			"sample_size": 80
+		}
+	],
+	"Lancashire": [
+		{
+			"name": "Preston",
+			"geocode": "-2.709503173828125,53.75926631751662,5mi",
+			"sample_size": 100
+		}
+	],
+	"Cumbria": [
+		{
+			"name": "Carlisle",
+			"geocode": "-2.745208740234375,53.453713656852536,5mi",
+			"sample_size": 100
+		},
+		{
+			"name": "Whitehaven",
+			"geocode": "-3.527984619140625,54.532238849162084,3mi",
+			"sample_size": 80
+		}
+	],
+	"Dumfries": [
+		{
+			"name": "Dumfries",
+			"geocode": "-3.6103820800781246,55.06853917515076,3mi",
+			"sample_size": 100
+		}
+	],
+	"The Stewartry of Kirkcudbright": [
+		{
+			"name": "Kirkcudbright",
+			"geocode": "-3.527984619140625,54.532238849162084,3mi",
+			"sample_size": 80
+		},
+		{
+			"name": "Castle Douglas",
+			"geocode": "-3.9269256591796875,54.94193509142297,2mi",
+			"sample_size": 100
+		}
+	],
+	"Wigtown": [
+		{
+			"name": "Newton Stewart",
+			"geocode": "-4.4769287109375,54.964213278995565,4mi",
+			"sample_size": 100
+		},
+		{
+			"name": "Stranraer",
+			"geocode": "-5.020751953125,54.902671792279655,2mi",
+			"sample_size": 80
+		}
+	],
+	"Fife": [
+		{
+			"name": "Dunfermline",
+			"geocode": "-3.4606933593749996,56.07280196676423,3mi",
+			"sample_size": 100
+		},
+		{
+			"name": "Glenrothes",
+			"geocode": "-3.1510162353515625,56.19677300587459,4mi",
+			"sample_size": 100
+		},
+		{
+			"name": "St Andrews",
+			"geocode": "-2.80426025390625,56.33062433486386,4mi",
+			"sample_size": 100
+		}
+	],
+	"Angus": [
+		{
+			"name": "Montrose",
+			"geocode": "-2.4777603149414062,56.7082748145827,2mi",
+			"sample_size": 100
+		},
+		{
+			"name": "Arbroath",
+			"geocode": "-2.60101318359375,56.572912959088534,3mi",
+			"sample_size": 100
+		},
+		{
+			"name": "Forfar",
+			"geocode": "-2.885284423828125,56.64414704199467,4mi",
+			"sample_size": 80
+		},
+		{
+			"name": "Kirriemuir",
+			"geocode": "-3.0044174194335938,56.674904273488885,2mi",
+			"sample_size": 80
+		}
+	]
+}

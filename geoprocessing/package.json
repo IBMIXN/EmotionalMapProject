@@ -1,0 +1,16 @@
+{
+  "name": "emotionmapprocessing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "process.js",
+  "dependencies": {
+    "geojson-geometries-lookup": "^0.5.0",
+    "geojson-polygon-center": "^0.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
