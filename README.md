@@ -16,4 +16,4 @@ Run a production build:
 docker-compose -f docker-compose.prod.yml up
 ```
 
-Docker deployment partly inspired by https://github.com/mrcoles/node-react-docker-compose
+Docker deployment inspired by [mrcoles/node-react-docker-compose](https://github.com/mrcoles/node-react-docker-compose), with the addition of Caddy to serve the API over SSL.
