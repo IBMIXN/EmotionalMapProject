@@ -9,7 +9,7 @@ services:
     environment:
       NODE_ENV: production
   caddy:
-    image: caddy
+    image: caddy:2-alpine
     restart: always
     ports:
       - "443:443"
