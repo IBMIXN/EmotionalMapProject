@@ -23,6 +23,7 @@ services:
       - "80:80"
     volumes:
       - "./Caddyfile:/etc/caddy/Caddyfile"
+    restart: always
   mongodb:
     image: mongo:4.4.4
     env_file:
