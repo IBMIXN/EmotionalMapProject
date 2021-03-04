@@ -40,8 +40,8 @@ app.get('/counties', async (req, res) => {
 
 app.get('/hashtags', async (req, res) => {
   console.log("Request: Fetching hashtags")
-  const counties = await Hashtag.find()
-  res.json(counties);
+  const hashtags = await Hashtag.find().sort({count: -1}).limit(10)
+  res.json(hashtags);
 });
 
 app.get('/refresh', async (req, res) => {

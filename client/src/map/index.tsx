@@ -8,7 +8,7 @@ import { RootState } from "../store";
 import britain from "./britishcountiestopojson.json";
 import northernireland from "./northernirelandtopojson.json";
 import ReactTooltip from "react-tooltip";
-import { Counties, County, getEmotionData } from "../services/api"
+import { Counties, County, getCountiesData } from "../services/api"
 
 
 
@@ -81,7 +81,7 @@ export const Map = (props: MapProps): JSX.Element => {
 
   const [emotionData, setEmotionData] = React.useState<Counties | undefined>(undefined);
   React.useEffect(() => {
-    getEmotionData().then((data) => {
+    getCountiesData().then((data) => {
       setEmotionData(data)
     })
   }, [setEmotionData])
@@ -105,7 +105,7 @@ export const Map = (props: MapProps): JSX.Element => {
     }
   })();
 
-  const colourScale = scaleLinear<string>().domain([-0.2, 0.7]).range(["white", colour]);
+  const colourScale = scaleLinear<string>().domain([0, 0.5]).range(["white", colour]);
 
 
 

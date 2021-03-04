@@ -1,5 +1,5 @@
 export interface Counties {
-  [name: string] : County
+  [name: string]: County
 }
 export interface County {
   name: string;
@@ -13,13 +13,24 @@ export interface Settlements {
 }
 
 export interface Emotions {
-  joy:     number;
-  fear:    number;
-  anger:   number;
+  joy: number;
+  fear: number;
+  anger: number;
   sadness: number;
 }
 
-export function getEmotionData(): Promise<Counties> {
-    return fetch('/api/counties')
-      .then(data => data.json())
-  }
+export interface Hashtag {
+  hashtag: string;
+  count: number;
+}
+
+export function getCountiesData(): Promise<Counties> {
+  return fetch('/api/counties')
+    .then(data => data.json())
+}
+
+
+export function getHashtagData(): Promise<Hashtag[]> {
+  return fetch('/api/hashtags')
+    .then(data => data.json())
+}
