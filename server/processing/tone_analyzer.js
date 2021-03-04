@@ -17,7 +17,7 @@ const link_pattern = /https?:\/\/[\S]*/ //Catches links; while these are almost 
 const hashtag_pattern = /[@#][\S]*/ //Catches #hashtags and @Mentions
 const linebreak = "---------------------------------------------------------" //Used to delimit tweets
 
-console.log("Tone analyser set up")
+console.log("Tone Analyser set up")
 
 async function analyseTweets(tweets, useSentences = false) {
     /*
@@ -116,11 +116,12 @@ async function analyseTweets(tweets, useSentences = false) {
                 remainingTweets = false
             }
             requestBody = sliced_tweets.join(linebreak)
-            console.log("slice length: " + sliced_tweets.length)
-            console.log("tweets found: " + num_tweets)
+            console.log("ToneAnalyzer: slice length: " + sliced_tweets.length)
+            console.log("ToneAnalyzer: tweets found: " + num_tweets)
 
         }
         //Normalize to a decimal between 0 and 1
+        console.log("ToneAnalyzer: Before normalisation ")
         console.log(result)
         if (result["count"] > 0) { //but only if there's data to analyze. don't want any divide by 0 errors
             result["happy"] /= result["count"]
@@ -128,7 +129,7 @@ async function analyseTweets(tweets, useSentences = false) {
             result["anger"] /= result["count"]
             result["fear"] /= result["count"]
         }
-        console.log("Normalised: ")
+        console.log("ToneAnalyzer: Normalised ")
         console.log(result)
 
     } else {
@@ -195,7 +196,6 @@ function extractTones(tone_data, useSentences = false) {
             "anger": angry_counter,
             "fear": fear_counter
         }
-        console.log(output_tones)
         return output_tones
     } else {
         let happy_counter = 0 //"joy"

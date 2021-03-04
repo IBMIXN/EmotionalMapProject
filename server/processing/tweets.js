@@ -28,6 +28,7 @@ async function getTweets(settlement) {
     while (sample_remaining > 0) {
         try {
             // send a new request to the Twitter API
+            console.log(`Requesting ${page_size} tweets`);
             console.log(url+query)
             const results = await fetch(url + query, reqInit).then(data => data.json());
             // check that the response contains Tweets (before the query is changed)

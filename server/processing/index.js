@@ -19,13 +19,18 @@ async function refresh() {
     await Hashtag.deleteMany({});
 
     for (const [county, settlements] of Object.entries(counties)) {
+        const numberOfSettlements = settlements.length
+        console.log(`Processing county ${county} with ${numberOfSettlements} settlements`);
         const settlementIds = [];
         const hashtagarray = []
         const emotionarray = []
         for (let settlement of settlements) {
+            console.log(`Getting tweets for ${county} : ${settlement.name}`);
             const { tweets, hashtags } = await getTweets(settlement);
             hashtagarray.push(hashtags);
             console.log(tweets.length + " vs " + settlement.sample_size);
+            console.log(`Received ${tweets.length} tweets (expected ${settlement.sample_size})`);
+            console.log(`Analysing tweets for ${county} : ${settlement.name}`);
             const result = await analyseTweets(tweets, true);
             const emotions = {
                 joy: result.happy,
@@ -33,6 +38,7 @@ async function refresh() {
                 anger: result.anger,
                 fear: result.fear
             };
+            console.log(`Received ${JSON.stringify(emotions)} for ${county} : ${settlement.name}`);
             emotionarray.push(emotions);
 
             const addedSettlement = await Settlement.create({
@@ -44,22 +50,27 @@ async function refresh() {
         }
         const hashtags = mergeSum(hashtagarray)
         const totals = mergeSum(emotionarray)
-        const numberOfSettlements = settlements.length
+
+        const countyEmotions = {
+            joy: totals.joy / numberOfSettlements,
+            sadness: totals.sadness / numberOfSettlements,
+            anger: totals.anger / numberOfSettlements,
+            fear: totals.fear / numberOfSettlements
+        };
+
+        console.log(`Adding ${county} to database with ${JSON.stringify(countyEmotions)}`);
 
         await County.create({
             name: county,
-            emotions: {
-                joy: totals.joy / numberOfSettlements,
-                sadness: totals.sadness / numberOfSettlements,
-                anger: totals.anger / numberOfSettlements,
-                fear: totals.fear / numberOfSettlements
-            },
+            emotions: countyEmotions,
             settlements: settlementIds
         });
 
+        console.log(`Incrementing tally for ${Object.keys(hashtags).length} hashtags`);
         for (let hashtag in hashtags) {
-            await Hashtag.findOneAndUpdate({ hashtag: hashtag }, {$inc: { count: hashtags[hashtag]} },  {new: true, upsert: true});
+            await Hashtag.findOneAndUpdate({ hashtag: hashtag }, { $inc: { count: hashtags[hashtag] } }, { new: true, upsert: true });
         }
+        console.log(`${county} done!`);
     }
 
 }
