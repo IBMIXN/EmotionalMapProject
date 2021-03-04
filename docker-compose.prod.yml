@@ -12,24 +12,26 @@ services:
       NODE_ENV: production
     depends_on:
       - mongodb
+    restart: always
+
   caddy:
     build: 
       context: .
       dockerfile: Dockerfile.web
-    restart: always
     ports:
       - "443:443"
       - "80:80"
     volumes:
       - "./Caddyfile:/etc/caddy/Caddyfile"
   mongodb:
-    image: mongo:latest
+    image: mongo:4.4.4
     env_file:
       - mongo-variables.env
     expose:
       - 27017
     volumes:
       - mongodb_data:/data/db
+    restart: always
 
 volumes:
   mongodb_data:
