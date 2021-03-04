@@ -10,7 +10,9 @@ const connectDb = () => {
     "authSource": "admin",
     "user": process.env.MONGO_INITDB_ROOT_USERNAME,
     "pass": process.env.MONGO_INITDB_ROOT_PASSWORD,
-    "useFindAndModify": false
+    "useFindAndModify": false,
+    "useCreateIndex": true,
+    "useNewUrlParser": true
   });
 };
 

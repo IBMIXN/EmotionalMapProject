@@ -33,11 +33,13 @@ connectDb().then(() => {
 
 // path for accessing emotion data
 app.get('/counties', async (req, res) => {
+  console.log("Request: Fetching counties")
   const counties = await County.find().populate('settlements').then((docs) => docs.reduce((acc, it) => (acc[it.name] = it, acc), {}));
   res.json(counties);
 });
 
 app.get('/hashtags', async (req, res) => {
+  console.log("Request: Fetching hashtags")
   const counties = await Hashtag.find()
   res.json(counties);
 });

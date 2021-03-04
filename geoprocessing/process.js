@@ -14,7 +14,6 @@ let lookup = new GeoJsonGeometriesLookup(allcounties)
 
 // Filter only points in case anything else is left in geojson
 const points = geojson.features.filter(feature => {
-    console.log(feature)
     return feature.geometry.type === "Point"
 })
 
@@ -75,5 +74,5 @@ for (const [county, settlements] of Object.entries(result)) {
     }
 }
 
-fs.writeFileSync("output/output.json", JSON.stringify(result))
-fs.writeFileSync("output/counties.json", JSON.stringify(counties))
+fs.writeFileSync("output/counties.json", JSON.stringify(result))
+fs.writeFileSync("output/counties_list.json", JSON.stringify(counties))
