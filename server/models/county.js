@@ -1,12 +1,9 @@
 
 import mongoose from 'mongoose';
+import mongooseHidden from 'mongoose-hidden'
 
-
-const settlementSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
+// Data structure for emotions
+const emotionsSchema = new mongoose.Schema({
   joy: {
     type: Number,
     required: true
@@ -25,30 +22,22 @@ const settlementSchema = new mongoose.Schema({
   },
 });
 
+
+// Data structure for counties
 const countySchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
   },
-  joy: {
-    type: Number,
-    required: true
+  emotions: {
+    type: emotionsSchema,
+    required: false
   },
-  fear: {
-    type: Number,
-    required: true
-  },
-  anger: {
-    type: Number,
-    required: true
-  },
-  sadness: {
-    type: Number,
-    required: true
-  },
-  settlements: [settlementSchema]
+  settlements: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Settlement' }]
 });
 
 const County = mongoose.model('County', countySchema);
+
+export { emotionsSchema }
 
 export default County;

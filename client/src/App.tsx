@@ -17,7 +17,7 @@ export const App = (): JSX.Element => {
       <Box flex="1" h="100%" p={4} ml="350px">
         <Switch>
           <Route exact path="/">
-            <Map onClickAction={true} />
+            <Map onClickEnabled={true} />
           </Route>
           <Route path="/stats">
             <Stats />
@@ -31,7 +31,7 @@ export const App = (): JSX.Element => {
 
       <Switch>
         <Route exact path="/">
-          <Map onClickAction={true} />
+          <Map onClickEnabled={true} />
         </Route>
         <Route path="/stats">
           <Stats />

@@ -23,7 +23,7 @@ export const Stats = (): JSX.Element => {
           p={4}
         >
 
-            <Map onClickAction={false} />
+            <Map onClickEnabled={false} />
 
         </Flex>
       </GridItem>

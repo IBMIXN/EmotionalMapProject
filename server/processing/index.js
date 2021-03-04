@@ -1,6 +1,8 @@
 import getTweets from "./tweets.js";
 import fs from "fs"; // used to write JSON files for Tweets and hashtags.
 import analyseTweets from "./tone_analyzer.js";
+import Settlement from "../models/settlement.js";
+import County from "../models/county.js";
 
 async function refresh(models) {
     // Get tweets
@@ -15,29 +17,47 @@ async function refresh(models) {
     await models.County.deleteMany({});
 
     for (const [county, settlements] of Object.entries(counties)) {
-        let analyzedSettlements = [];
+        const settlementIds = [];
+        const totals = {
+            joy: 0,
+            sadness: 0,
+            anger: 0,
+            fear: 0
+        }
         for (let settlement of settlements) {
             const { tweets, hashtags } = await getTweets(settlement);
             console.log(tweets.length + " vs " + settlement.sample_size);
             const result = await analyseTweets(tweets, true);
-            analyzedSettlements.push({
+
+            totals.joy += result.happy;
+            totals.sadness += result.sad;
+            totals.anger += result.anger;
+            totals.fear += result.fear;
+
+            const addedSettlement = await Settlement.create({
                 name: settlement.name,
-                joy: result.happy,
-                sadness: result.sad,
-                anger: result.anger,
-                fear: result.fear
-            })
+                emotions: {
+                    joy: result.happy,
+                    sadness: result.sad,
+                    anger: result.anger,
+                    fear: result.fear
+                }
+            });
+
+            settlementIds.push(addedSettlement._id)
         }
         const numberOfSettlements = settlements.length
 
-        await models.County.create({
+        await County.create({
             name: county,
-            joy: analyzedSettlements.reduce((acc, val) => acc + val.joy, 0) / numberOfSettlements,
-            sadness: analyzedSettlements.reduce((acc, val) => acc + val.sadness, 0) / numberOfSettlements,
-            anger: analyzedSettlements.reduce((acc, val) => acc + val.anger, 0) / numberOfSettlements,
-            fear: analyzedSettlements.reduce((acc, val) => acc + val.fear, 0) / numberOfSettlements,
-            settlements: analyzedSettlements
-        })
+            emotions: {
+                joy: totals.joy / numberOfSettlements,
+                sadness: totals.sadness / numberOfSettlements,
+                anger: totals.anger / numberOfSettlements,
+                fear: totals.fear / numberOfSettlements
+            },
+            settlements: settlementIds
+        });
     }
 }
 

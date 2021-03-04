@@ -14,55 +14,30 @@ app.use(bodyParser.json());
 // start node server after connecting to database
 const PORT = process.env.PORT || 8080;
 const HOST = '0.0.0.0';
+
 connectDb().then(() => {
   console.log(`Database connected`);
 
   app.listen(PORT, HOST, () => {
     console.log(`API available http://${HOST}:${PORT}`);
   });
-  
+
   // Schedule getTweets every day at midnight
   schedule.scheduleJob('0 0 * * *', () => {
-    refresh();
+    // refresh();
   });
 })
 
 
 // path for accessing emotion data
 app.get('/counties', async (req, res) => {
-  const counties = await models.County.find();
-  res.send(counties);
+  const counties = await models.County.find().populate('settlements').then((docs) => docs.reduce((acc, it) => (acc[it.name] = it, acc), {}));
+  res.json(counties);
 });
 
 app.get('/refresh', async (req, res) => {
   refresh(models);
-  return "Refreshing - check logs"
-});
-
-const getMapData = () => {
-  // code to access data from database for use in map
-  console.log('ran get map data');
-};
-
-const getChartData = () => {
-  // code to get data from database for the pie chart
-  console.log('ran get chart data');
-};
-
-const getHashtagData = () => {
-  // code to get data from database for the pie chart
-  console.log('ran get hashtag data');
-};
-
-const getLeaderboardData = () => {
-  // code to get data from database for the leaderboard
-  console.log('ran get leaderboard data');
-};
-
-// path for accessing map data
-app.get('/map', async (req, res) => {
-  const counties = await models.County.find();
-  res.send(counties);
+  res.send("Refreshing - check logs");
 });
 
 // path for getting pie chart data
