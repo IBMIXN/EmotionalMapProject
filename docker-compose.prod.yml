@@ -10,6 +10,8 @@ services:
       - mongo-variables.env
     environment:
       NODE_ENV: production
+    depends_on:
+      - mongodb
   caddy:
     build: 
       context: .
@@ -24,10 +26,10 @@ services:
     image: mongo:latest
     env_file:
       - mongo-variables.env
-    ports:
-      - 27017:27017
+    expose:
+      - 27017
     volumes:
-      - mongodb_data_container:/data/db
+      - mongodb_data:/data/db
 
 volumes:
-  mongodb_data_container:
+  mongodb_data:

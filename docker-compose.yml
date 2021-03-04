@@ -10,6 +10,8 @@ services:
       - ./server/:/home/node/app
       - /home/node/app/node_modules
     image: "emotionmap-backend"
+    depends_on:
+      - mongodb
     ports:
       - "8080:8080"
     environment:
