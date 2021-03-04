@@ -5,6 +5,8 @@ import schedule from "node-schedule";
 import models, { connectDb } from './models/index.js';
 
 import { refresh } from "./processing/index.js";
+import County from "./models/county.js";
+import Hashtag from "./models/hashtag.js";
 const app = express();
 
 // enable parsing of http request body
@@ -31,12 +33,17 @@ connectDb().then(() => {
 
 // path for accessing emotion data
 app.get('/counties', async (req, res) => {
-  const counties = await models.County.find().populate('settlements').then((docs) => docs.reduce((acc, it) => (acc[it.name] = it, acc), {}));
+  const counties = await County.find().populate('settlements').then((docs) => docs.reduce((acc, it) => (acc[it.name] = it, acc), {}));
+  res.json(counties);
+});
+
+app.get('/hashtags', async (req, res) => {
+  const counties = await Hashtag.find()
   res.json(counties);
 });
 
 app.get('/refresh', async (req, res) => {
-  refresh(models);
+  refresh();
   res.send("Refreshing - check logs");
 });
 

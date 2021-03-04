@@ -1,6 +1,5 @@
 
 import mongoose from 'mongoose';
-import mongooseHidden from 'mongoose-hidden'
 
 // Data structure for emotions
 const emotionsSchema = new mongoose.Schema({
@@ -28,6 +27,7 @@ const countySchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
+    unique: true
   },
   emotions: {
     type: emotionsSchema,

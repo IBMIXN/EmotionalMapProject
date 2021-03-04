@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import './plugins.js'
 import County from './county.js';
 import Settlement from './settlement.js';
+import Hashtag from './hashtag.js'
 
 // Connect to the database with the admin account
 const connectDb = () => {
@@ -9,10 +10,11 @@ const connectDb = () => {
     "authSource": "admin",
     "user": process.env.MONGO_INITDB_ROOT_USERNAME,
     "pass": process.env.MONGO_INITDB_ROOT_PASSWORD,
+    "useFindAndModify": false
   });
 };
 
-const models = { County, Settlement };
+const models = { County, Settlement, Hashtag };
 
 export { connectDb };
 

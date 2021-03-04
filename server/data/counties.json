@@ -1,19 +1,34 @@
 {
-    "Cornwall": [
+    "Durham": [
         {
-            "name": "Helston",
-            "geocode": "-5.267772674560547,50.10538674287487,3mi",
-            "sample_size": 50
+            "name": "Darlington",
+            "geocode": "54.53024668818649,-1.5525054931640623,4km",
+            "sample_size": 28
         },
         {
-            "name": "Penzance",
-            "geocode": "-5.538825988769531,50.12123848233564,4mi",
-            "sample_size": 50
+            "name": "Hartlepool",
+            "geocode": "54.69090006510652,-1.2067794799804685,5km",
+            "sample_size": 28
         },
         {
-            "name": "Falmouth",
-            "geocode": "-5.092506408691406,50.16414392753407,4mi",
-            "sample_size": 50
+            "name": "Stockton-on-Tees",
+            "geocode": "54.56449831397615,-1.3152694702148438,4km",
+            "sample_size": 28
+        },
+        {
+            "name": "Durham",
+            "geocode": "54.77613794372616,-1.580657958984375,3km",
+            "sample_size": 28
+        },
+        {
+            "name": "Billingham",
+            "geocode": "54.60786894786166,-1.2900352478027344,2km",
+            "sample_size": 19
+        },
+        {
+            "name": "Peterlee",
+            "geocode": "54.7666319077609,-1.336212158203125,5km",
+            "sample_size": 16
         }
     ]
 }
