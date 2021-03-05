@@ -7,6 +7,7 @@ import models, { connectDb } from './models/index.js';
 import { refresh } from "./processing/index.js";
 import County from "./models/county.js";
 import Hashtag from "./models/hashtag.js";
+import Settlement from "./models/settlement.js";
 const app = express();
 
 // enable parsing of http request body
@@ -41,6 +42,12 @@ app.get('/counties', async (req, res) => {
 app.get('/hashtags', async (req, res) => {
   console.log("Request: Fetching hashtags")
   const hashtags = await Hashtag.find().sort({count: -1}).limit(10)
+  res.json(hashtags);
+});
+
+app.get('/breakdown', async (req, res) => {
+  console.log("Request: Fetching hashtags")
+  const hashtags = await Settlement.find().sort({count: -1}).limit(10)
   res.json(hashtags);
 });
 

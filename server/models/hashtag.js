@@ -1,7 +1,7 @@
 
 import mongoose from 'mongoose';
 
-// Data structure for counties
+// Data structure for hashtags
 const hashtagSchema = new mongoose.Schema({
   hashtag: {
     type: String,

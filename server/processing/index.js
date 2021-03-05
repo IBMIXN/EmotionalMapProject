@@ -28,7 +28,7 @@ async function refresh() {
             console.log(`Getting tweets for ${county} : ${settlement.name}`);
             const { tweets, hashtags } = await getTweets(settlement);
             hashtagarray.push(hashtags);
-            console.log(tweets.length + " vs " + settlement.sample_size);
+            console.log("COMPARE:" + tweets.length + " vs " + settlement.sample_size);
             console.log(`Received ${tweets.length} tweets (expected ${settlement.sample_size})`);
             console.log(`Analysing tweets for ${county} : ${settlement.name}`);
             const result = await analyseTweets(tweets, true);
