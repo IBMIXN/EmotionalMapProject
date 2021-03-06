@@ -1,6 +1,5 @@
 // import dependencies and initialize express
 import express from "express";
-import bodyParser from "body-parser";
 import schedule from "node-schedule";
 import models, { connectDb } from './models/index.js';
 
@@ -11,8 +10,8 @@ import Settlement from "./models/settlement.js";
 const app = express();
 
 // enable parsing of http request body
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 // start node server after connecting to database
 const PORT = process.env.PORT || 8080;
