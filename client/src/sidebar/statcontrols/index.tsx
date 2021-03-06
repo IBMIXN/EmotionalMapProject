@@ -6,6 +6,7 @@ import {
   Heading,
   Badge,
 } from "@chakra-ui/react";
+import Attribution from "../attribution";
 
 
 
@@ -30,8 +31,9 @@ export const StatControls = (): JSX.Element => {
         </Heading>
         <Text>
           Every day, at midnight, we trawl through hundreds of tweets and pass
-          them to IBM Watson for tone analysis.{" "}
+          them to IBM Watson for tone analysis.<br/><br/>
         </Text>
+        <Attribution/>
       </Box>
     </Box>
   );
