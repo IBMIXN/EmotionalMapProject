@@ -41,14 +41,35 @@ app.get('/counties', async (req, res) => {
 
 app.get('/hashtags', async (req, res) => {
   console.log("Request: Fetching hashtags")
-  const hashtags = await Hashtag.find().sort({count: -1}).limit(10)
+  const hashtags = await Hashtag.find().sort({ count: -1 }).limit(10)
   res.json(hashtags);
 });
 
 app.get('/breakdown', async (req, res) => {
-  console.log("Request: Fetching hashtags")
-  const hashtags = await Settlement.find().sort({count: -1}).limit(10)
-  res.json(hashtags);
+  console.log("Request: Fetching breakdown")
+  const breakdown = await Settlement.aggregate([{
+    "$group": {
+      _id: null,
+      "joy": {
+        $sum: "$emotions.joy"
+      },
+      "fear": {
+        $sum: "$emotions.fear"
+      },
+      "anger": {
+        $sum: "$emotions.anger"
+      },
+      "sadness": {
+        $sum: "$emotions.sadness"
+      }
+    }
+  }])
+  res.json({
+    joy: breakdown[0].joy,
+    fear: breakdown[0].fear,
+    anger: breakdown[0].anger,
+    sadness: breakdown[0].sadness,
+  });
 });
 
 app.get('/refresh', async (req, res) => {

@@ -34,3 +34,9 @@ export function getHashtagData(): Promise<Hashtag[]> {
   return fetch('/api/hashtags')
     .then(data => data.json())
 }
+
+
+export function getBreakdownData(): Promise<Emotions> {
+  return fetch('/api/breakdown')
+    .then(data => data.json())
+}

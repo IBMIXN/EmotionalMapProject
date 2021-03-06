@@ -1,9 +1,7 @@
 import {
   Box,
   Heading,
-  Skeleton,
   SkeletonText,
-  Stack,
   Table,
   Tbody,
   Td,
