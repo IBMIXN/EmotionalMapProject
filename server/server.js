@@ -45,6 +45,12 @@ app.get('/hashtags', async (req, res) => {
   res.json(hashtags);
 });
 
+app.get('/joyfulsettlements', async (req, res) => {
+  console.log("Request: Fetching Joyful Settlements")
+  const hashtags = await Settlement.find().sort({ 'emotions.joy': -1 }).limit(10)
+  res.json(hashtags);
+});
+
 app.get('/breakdown', async (req, res) => {
   console.log("Request: Fetching breakdown")
   const breakdown = await Settlement.aggregate([{

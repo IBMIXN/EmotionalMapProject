@@ -4,10 +4,10 @@ export interface Counties {
 export interface County {
   name: string;
   emotions: Emotions;
-  settlements: Settlements[];
+  settlements: Settlement[];
 }
 
-export interface Settlements {
+export interface Settlement {
   name: string;
   emotions: Emotions;
 }
@@ -38,5 +38,10 @@ export function getHashtagData(): Promise<Hashtag[]> {
 
 export function getBreakdownData(): Promise<Emotions> {
   return fetch('/api/breakdown')
+    .then(data => data.json())
+}
+
+export function getJoyfulSettlements(): Promise<Settlement[]> {
+  return fetch('/api/joyfulsettlements')
     .then(data => data.json())
 }
