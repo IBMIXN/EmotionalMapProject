@@ -16,6 +16,7 @@ async function refresh() {
     });
 
     await County.deleteMany({});
+    await Settlement.deleteMany({});
     await Hashtag.deleteMany({});
 
     for (const [county, settlements] of Object.entries(counties)) {
