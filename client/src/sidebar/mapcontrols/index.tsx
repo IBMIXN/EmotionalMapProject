@@ -87,9 +87,16 @@ export const MapControls = (): JSX.Element => {
           How does it work?
         </Heading>
         <Text>
-          Every day, at midnight, we trawl through hundreds of tweets and pass
+          The Emotion Map has been developed to provide an example of how our IBM Watson
+           can be used to demonstrate the benefits and capabilities of Artificial Intelligence (AI).<br /><br/>
+           Every day, at midnight, we trawl through hundreds of tweets and pass
           them to IBM Watson for tone analysis.
+          <br /><br/>
         </Text>
+        <Text fontSize="xs">Map data is provided by <a href="https://www.ordnancesurvey.co.uk/business-government/products/boundaryline"><Text as="u">ordnancesurvey.co.uk</Text></a> and <a href="https://www.opendatani.gov.uk/dataset/osni-open-data-50k-boundaries-ni-counties"><Text as="u">opendatani.gov.uk</Text></a>  under the <a href="http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"><Text as="u">Open Government Licence v3.0</Text></a></Text>
+       <a href="https://developer.twitter.com/"> <Text mt={2} fontSize="xs" as="u">Twitter API</Text></a>
+       <a href="https://www.ibm.com/watson/services/tone-analyzer/"> <Text mt={2} fontSize="xs" as="u">IBM Watson Tone Analyzer</Text></a>
+
       </Box>
     </Box>
   );
