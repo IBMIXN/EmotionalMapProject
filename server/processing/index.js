@@ -14,6 +14,7 @@ async function refresh() {
         }
         return JSON.parse(data);
     });
+    console.log("Counties loaded");
 
     await County.deleteMany({});
     await Settlement.deleteMany({});
@@ -43,6 +44,8 @@ async function refresh() {
 
             const addedSettlement = await Settlement.create({
                 name: settlement.name,
+                sentenceCount: result.count,
+                tweetCount: tweets.length,
                 emotions: emotions
             });
 

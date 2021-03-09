@@ -8,6 +8,14 @@ const settlementSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    sentenceCount: {
+        type: Number,
+        required: false
+    },
+    tweetCount: {
+        type: Number,
+        required: true
+    },
     emotions: {
         type: emotionsSchema,
         required: true

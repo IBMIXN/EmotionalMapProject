@@ -10,6 +10,8 @@ export interface County {
 export interface Settlement {
   name: string;
   emotions: Emotions;
+  sentenceCount: number;
+  tweetCount: number;
 }
 
 export interface Emotions {

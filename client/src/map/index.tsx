@@ -41,28 +41,29 @@ const InformationBox = (props: InformationBoxProps): JSX.Element => {
     <Box mb="1">{selectionHeader()}
     </Box>
     {props.selectedCounty.settlements.map((settlement) => {
+      const title = `${settlement.name} (s: ${settlement.sentenceCount} t: ${settlement.tweetCount})`
       if (props.view === View.STRONGEST) {
         const maxKey = Object.entries(settlement.emotions).reduce((a, b) => a[1] > b[1] ? a : b)[0]
         switch (maxKey) {
           case Emotion.FEAR:
-            return <Text><strong>{settlement.name}</strong>: Fear</Text>
+            return <Text><strong>{title}</strong>: Fear</Text>
           case Emotion.ANGER:
-            return <Text><strong>{settlement.name}</strong>: Anger</Text>
+            return <Text><strong>{title}</strong>: Anger</Text>
           case Emotion.SADNESS:
-            return <Text><strong>{settlement.name}</strong>: Sadness</Text>
+            return <Text><strong>{title}</strong>: Sadness</Text>
           default:
-            return <Text><strong>{settlement.name}</strong>: Joy</Text>
+            return <Text><strong>{title}</strong>: Joy</Text>
         }
       } else {
         switch (props.emotion) {
           case Emotion.FEAR:
-            return <Text><strong>{settlement.name}</strong>: {(settlement.emotions.fear * 100).toFixed(0)}%</Text>
+            return <Text><strong>{title}</strong>: {(settlement.emotions.fear * 100).toFixed(0)}%</Text>
           case Emotion.ANGER:
-            return <Text><strong>{settlement.name}</strong>: {(settlement.emotions.anger * 100).toFixed(0)}%</Text>
+            return <Text><strong>{title}</strong>: {(settlement.emotions.anger * 100).toFixed(0)}%</Text>
           case Emotion.SADNESS:
-            return <Text><strong>{settlement.name}</strong>: {(settlement.emotions.sadness * 100).toFixed(0)}%</Text>
+            return <Text><strong>{title}</strong>: {(settlement.emotions.sadness * 100).toFixed(0)}%</Text>
           default:
-            return <Text><strong>{settlement.name}</strong>: {(settlement.emotions.joy * 100).toFixed(0)}%</Text>
+            return <Text><strong>{title}</strong>: {(settlement.emotions.joy * 100).toFixed(0)}%</Text>
         }
       }
     })
