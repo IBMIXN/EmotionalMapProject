@@ -26,40 +26,14 @@ connectDb().then(() => {
 
   // Schedule getTweets every day at midnight
   schedule.scheduleJob('0 0 * * *', () => {
-    // refresh();
+    refresh();
   });
 })
-
-const sumArrayValues = (values) => {
-  return values.reduce((p, c) => p + c, 0)
-}
-
-const weightedMean = (factorsArray, weightsArray) => {
-  return sumArrayValues(factorsArray.map((factor, index) => factor * weightsArray[index])) / sumArrayValues(weightsArray)
-}
 
 // path for accessing emotion data
 app.get('/counties', async (req, res) => {
   console.log("Request: Fetching counties")
-  const counties = await County.find().lean().populate('settlements').then((docs) => docs.reduce((acc, it) => (acc[it.name] = it, acc), {}));
-  for (let county of Object.values(counties)) {
-    const joy = [];
-    const fear = [];
-    const anger = [];
-    const sadness = [];
-    const weights = [];
-    for (let settlement of Object.values(county.settlements)) {
-      joy.push(settlement.emotions.joy)
-      fear.push(settlement.emotions.fear)
-      anger.push(settlement.emotions.anger)
-      sadness.push(settlement.emotions.sadness)
-      weights.push(settlement.sentenceCount)
-    }
-    county.emotions.joy = weightedMean(joy, weights)
-    county.emotions.fear = weightedMean(fear, weights)
-    county.emotions.anger = weightedMean(anger, weights)
-    county.emotions.sadness = weightedMean(sadness, weights)
-  }
+  const counties = await County.find().populate('settlements').then((docs) => docs.reduce((acc, it) => (acc[it.name] = it, acc), {}));
   res.json(counties);
 });
 

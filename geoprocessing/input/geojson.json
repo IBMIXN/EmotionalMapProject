@@ -3889,21 +3889,6 @@
     {
       "type": "Feature",
       "properties": {
-        "radius": "5km",
-        "name": "Kinbrace",
-        "sample_size": 100
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -3.9382553100585933,
-          58.25931377263744
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "radius": "4km",
         "name": "Golspie",
         "sample_size": 100

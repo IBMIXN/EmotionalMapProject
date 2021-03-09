@@ -5,6 +5,15 @@ import Settlement from "../models/settlement.js";
 import County from "../models/county.js";
 import Hashtag from "../models/hashtag.js";
 
+
+const sumArrayValues = (values) => {
+    return values.reduce((p, c) => p + c, 0)
+}
+
+const weightedMean = (factorsArray, weightsArray) => {
+    return sumArrayValues(factorsArray.map((factor, index) => factor * weightsArray[index])) / sumArrayValues(weightsArray)
+}
+
 async function refresh() {
     // Get tweets
     const counties = await fs.promises.readFile("./data/counties.json").then((data, err) => {
@@ -24,8 +33,12 @@ async function refresh() {
         const numberOfSettlements = settlements.length
         console.log(`Processing county ${county} with ${numberOfSettlements} settlements`);
         const settlementIds = [];
-        const hashtagarray = []
-        const emotionarray = []
+        const hashtagarray = [];
+        const joy = [];
+        const fear = [];
+        const anger = [];
+        const sadness = [];
+        const weights = [];
         for (let settlement of settlements) {
             console.log(`Getting tweets for ${county} : ${settlement.name}`);
             const { tweets, hashtags } = await getTweets(settlement);
@@ -40,11 +53,17 @@ async function refresh() {
                 fear: result.fear
             };
             console.log(`Received ${JSON.stringify(emotions)} for ${county} : ${settlement.name}`);
-            emotionarray.push(emotions);
+
+            joy.push(emotions.joy)
+            fear.push(emotions.fear)
+            anger.push(emotions.anger)
+            sadness.push(emotions.sadness)
+            const sentenceCount = Object.is(result.count, undefined) ? 0: result.count 
+            weights.push(sentenceCount)
 
             const addedSettlement = await Settlement.create({
                 name: settlement.name,
-                sentenceCount: result.count,
+                sentenceCount: sentenceCount,
                 tweetCount: tweets.length,
                 emotions: emotions
             });
@@ -52,13 +71,12 @@ async function refresh() {
             settlementIds.push(addedSettlement._id)
         }
         const hashtags = mergeSum(hashtagarray)
-        const totals = mergeSum(emotionarray)
 
         const countyEmotions = {
-            joy: totals.joy / numberOfSettlements,
-            sadness: totals.sadness / numberOfSettlements,
-            anger: totals.anger / numberOfSettlements,
-            fear: totals.fear / numberOfSettlements
+            joy: weightedMean(joy, weights),
+            sadness: weightedMean(sadness, weights),
+            anger: weightedMean(anger, weights),
+            fear: weightedMean(fear, weights)
         };
 
         console.log(`Adding ${county} to database with ${JSON.stringify(countyEmotions)}`);
