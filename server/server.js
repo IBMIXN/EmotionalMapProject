@@ -51,9 +51,9 @@ app.get('/counties', async (req, res) => {
     const weights = [];
     for (let settlement of Object.values(county.settlements)) {
       joy.push(settlement.emotions.joy)
-      fear.push(settlement.emotions.joy)
-      anger.push(settlement.emotions.joy)
-      sadness.push(settlement.emotions.joy)
+      fear.push(settlement.emotions.fear)
+      anger.push(settlement.emotions.anger)
+      sadness.push(settlement.emotions.sadness)
       weights.push(settlement.sentenceCount)
     }
     county.emotions.joy = weightedMean(joy, weights)
