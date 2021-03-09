@@ -42,7 +42,6 @@ const weightedMean = (factorsArray, weightsArray) => {
 app.get('/counties', async (req, res) => {
   console.log("Request: Fetching counties")
   const counties = await County.find().lean().populate('settlements').then((docs) => docs.reduce((acc, it) => (acc[it.name] = it, acc), {}));
-  console.log(counties);
   for (let county of Object.values(counties)) {
     const joy = [];
     const fear = [];

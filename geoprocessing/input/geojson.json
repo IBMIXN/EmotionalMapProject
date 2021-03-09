@@ -65,7 +65,7 @@
       "type": "Feature",
       "properties": {
         "name": "Callander",
-        "sample_size": 20,
+        "sample_size": 50,
         "radius": "7km"
       },
       "geometry": {
@@ -149,21 +149,6 @@
         "coordinates": [
           -3.739128112792969,
           56.155876152274296
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "Dollar",
-        "radius": "2km",
-        "sample_size": 25
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -3.6721801757812496,
-          56.16476632314696
         ]
       }
     },
@@ -2869,66 +2854,6 @@
     {
       "type": "Feature",
       "properties": {
-        "radius": "2km",
-        "name": "Brodick",
-        "sample_size": 100
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -5.1464080810546875,
-          55.57465711048381
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "radius": "2km",
-        "name": "Lochranza",
-        "sample_size": 100
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -5.296783447265625,
-          55.70390273988158
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "radius": "3km",
-        "name": "Kildonan",
-        "sample_size": 100
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -5.1102304458618155,
-          55.44286692163943
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "radius": "2.5km",
-        "name": "South Kiscadale",
-        "sample_size": 100
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -5.101819038391113,
-          55.48488450321984
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "radius": "2.5km",
         "name": "Dorchester",
         "sample_size": 100
@@ -3454,21 +3379,6 @@
     {
       "type": "Feature",
       "properties": {
-        "radius": "1.75km",
-        "name": "Dalmellington",
-        "sample_size": 100
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -4.392642974853516,
-          55.324554521853464
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "radius": "1.5km",
         "name": "New Cumnock",
         "sample_size": 100
@@ -3874,36 +3784,6 @@
     {
       "type": "Feature",
       "properties": {
-        "radius": "2.5km",
-        "name": "Mintlaw",
-        "sample_size": 100
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -2.0046615600585938,
-          57.522460201191905
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "radius": "1.75km",
-        "name": "Ballater",
-        "sample_size": 100
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -3.040294647216797,
-          57.04857386428486
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "radius": "1.75km",
         "name": "Dyce",
         "sample_size": 100
@@ -3979,7 +3859,7 @@
     {
       "type": "Feature",
       "properties": {
-        "radius": "2.75km",
+        "radius": "5km",
         "name": "Bonar Bridge",
         "sample_size": 100
       },
@@ -3994,7 +3874,7 @@
     {
       "type": "Feature",
       "properties": {
-        "radius": "1.75km",
+        "radius": "5km",
         "name": "Lochinver",
         "sample_size": 100
       },
@@ -4009,7 +3889,7 @@
     {
       "type": "Feature",
       "properties": {
-        "radius": "4.5km",
+        "radius": "5km",
         "name": "Kinbrace",
         "sample_size": 100
       },
@@ -4024,7 +3904,7 @@
     {
       "type": "Feature",
       "properties": {
-        "radius": "2.5km",
+        "radius": "4km",
         "name": "Golspie",
         "sample_size": 100
       },
@@ -4039,7 +3919,7 @@
     {
       "type": "Feature",
       "properties": {
-        "radius": "2.5km",
+        "radius": "4km",
         "name": "Dornoch",
         "sample_size": 100
       },
