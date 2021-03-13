@@ -1,5 +1,5 @@
 
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 
 // Data structure for emotions
 const emotionsSchema = new mongoose.Schema({
@@ -18,9 +18,8 @@ const emotionsSchema = new mongoose.Schema({
   sadness: {
     type: Number,
     required: true
-  },
-});
-
+  }
+})
 
 // Data structure for counties
 const countySchema = new mongoose.Schema({
@@ -34,10 +33,10 @@ const countySchema = new mongoose.Schema({
     required: false
   },
   settlements: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Settlement' }]
-});
+})
 
-const County = mongoose.model('County', countySchema);
+const County = mongoose.model('County', countySchema)
 
 export { emotionsSchema }
 
-export default County;
+export default County

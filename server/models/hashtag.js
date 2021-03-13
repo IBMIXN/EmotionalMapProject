@@ -1,5 +1,5 @@
 
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 
 // Data structure for hashtags
 const hashtagSchema = new mongoose.Schema({
@@ -11,10 +11,9 @@ const hashtagSchema = new mongoose.Schema({
   count: {
     type: Number,
     required: true
-  },
-});
+  }
+})
 
-const Hashtag = mongoose.model('Hashtag', hashtagSchema);
+const Hashtag = mongoose.model('Hashtag', hashtagSchema)
 
-
-export default Hashtag;
+export default Hashtag
