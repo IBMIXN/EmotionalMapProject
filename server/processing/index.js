@@ -39,52 +39,58 @@ async function refresh () {
     const sadness = []
     const weights = []
     for (const settlement of settlements) {
-      console.log(`Getting tweets for ${county} : ${settlement.name}`)
-      const { tweets, hashtags } = await getTweets(settlement)
-      hashtagarray.push(hashtags)
-      console.log(`Received ${tweets.length} tweets (expected ${settlement.sample_size})`)
-      console.log(`Analysing tweets for ${county} : ${settlement.name}`)
-      const result = await analyseTweets(tweets, true)
-      const emotions = {
-        joy: result.happy,
-        sadness: result.sad,
-        anger: result.anger,
-        fear: result.fear
+      try {
+        console.log(`Getting tweets for ${county} : ${settlement.name}`)
+        const { tweets, hashtags } = await getTweets(settlement)
+        hashtagarray.push(hashtags)
+        console.log(`Received ${tweets.length} tweets (expected ${settlement.sample_size})`)
+        console.log(`Analysing tweets for ${county} : ${settlement.name}`)
+        const result = await analyseTweets(tweets, true)
+        const emotions = {
+          joy: result.happy,
+          sadness: result.sad,
+          anger: result.anger,
+          fear: result.fear
+        }
+        console.log(`Received ${JSON.stringify(emotions)} for ${county} : ${settlement.name}`)
+
+        joy.push(emotions.joy)
+        fear.push(emotions.fear)
+        anger.push(emotions.anger)
+        sadness.push(emotions.sadness)
+        const sentenceCount = Object.is(result.count, undefined) ? 0 : result.count
+        weights.push(sentenceCount)
+
+        const addedSettlement = await Settlement.create({
+          name: settlement.name,
+          sentenceCount: sentenceCount,
+          tweetCount: tweets.length,
+          emotions: emotions
+        })
+
+        settlementIds.push(addedSettlement._id)
+      } catch (error) {
+        console.error(`Could not process settlement ${settlement.name}`)
       }
-      console.log(`Received ${JSON.stringify(emotions)} for ${county} : ${settlement.name}`)
-
-      joy.push(emotions.joy)
-      fear.push(emotions.fear)
-      anger.push(emotions.anger)
-      sadness.push(emotions.sadness)
-      const sentenceCount = Object.is(result.count, undefined) ? 0 : result.count
-      weights.push(sentenceCount)
-
-      const addedSettlement = await Settlement.create({
-        name: settlement.name,
-        sentenceCount: sentenceCount,
-        tweetCount: tweets.length,
-        emotions: emotions
-      })
-
-      settlementIds.push(addedSettlement._id)
     }
     const hashtags = mergeSum(hashtagarray)
 
-    const countyEmotions = {
-      joy: weightedMean(joy, weights),
-      sadness: weightedMean(sadness, weights),
-      anger: weightedMean(anger, weights),
-      fear: weightedMean(fear, weights)
+    if (weights.length > 0) {
+      const countyEmotions = {
+        joy: weightedMean(joy, weights),
+        sadness: weightedMean(sadness, weights),
+        anger: weightedMean(anger, weights),
+        fear: weightedMean(fear, weights)
+      }
+
+      console.log(`Adding ${county} to database with ${JSON.stringify(countyEmotions)}`)
+
+      await County.create({
+        name: county,
+        emotions: countyEmotions,
+        settlements: settlementIds
+      })
     }
-
-    console.log(`Adding ${county} to database with ${JSON.stringify(countyEmotions)}`)
-
-    await County.create({
-      name: county,
-      emotions: countyEmotions,
-      settlements: settlementIds
-    })
 
     console.log(`Incrementing tally for ${Object.keys(hashtags).length} hashtags`)
     for (const hashtag in hashtags) {
