@@ -14,7 +14,7 @@ export const Pie = (): JSX.Element => {
     })
   }, [setBreakdown])
 
-  let chart = () => {
+  const chart = () => {
     if (breakdown) {
       return <React.Fragment>
         <Box mt={6} alignContent="right">
@@ -42,7 +42,7 @@ export const Pie = (): JSX.Element => {
         <Center><Table mt={3} width="80%" variant="unstyled">
           <Tbody>
             {["Joy", "Fear", "Anger", "Sadness"].map((emotion, index) => {
-              return <React.Fragment>
+              return <React.Fragment key={emotion}>
                 <Td width="10px" style={{ padding: 0 }}>
                   <Icon viewBox="0 0 200 200" color={colours[index]}>
                     <path

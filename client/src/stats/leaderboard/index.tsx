@@ -22,7 +22,7 @@ export const Leaderboard = (): JSX.Element => {
   }, [setJoyfulSettlements])
 
 
-  let table = () => {
+  const table = () => {
     if (joyfulSettlements) {
       return <Table variant="simple">
         <Thead>

@@ -18,7 +18,7 @@ import dateFormat from "dateformat";
 export const Sidebar = (): JSX.Element => {
   const { push } = useHistory();
   const location = useLocation();
-  const stats: Boolean = location.pathname === "/stats";
+  const stats: boolean = location.pathname === "/stats";
   const bg = useColorModeValue("white", "gray.700");
 
   return (

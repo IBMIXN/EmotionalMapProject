@@ -23,7 +23,7 @@ export const Trending = (): JSX.Element => {
   }, [setHashtags])
 
 
-  let table = () => {
+  const table = () => {
     if (hashtags) {
       return <Table variant="simple">
         <Thead>

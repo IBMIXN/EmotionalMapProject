@@ -20,7 +20,7 @@ interface InformationBoxProps {
 const InformationBox = (props: InformationBoxProps): JSX.Element => {
   const bg = useColorModeValue("white", "gray.700");
 
-  let selectionHeader = () => {
+  const selectionHeader = () => {
     if (props.view === View.STRONGEST) {
       return <Text>Strongest emotion for each settlement</Text>
     } else {
