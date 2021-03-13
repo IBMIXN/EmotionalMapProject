@@ -88,13 +88,12 @@ export const MapControls = (): JSX.Element => {
           How does it work?
         </Heading>
         <Text>
-          The Emotion Map has been developed to provide an example of how our IBM Watson
-           can be used to demonstrate the benefits and capabilities of Artificial Intelligence (AI).<br /><br/>
-           Every day, at midnight, we trawl through hundreds of tweets and pass
-          them to IBM Watson for tone analysis.
-          <br /><br/>
+          The Emotion Map has been developed to provide an example of how IBM Watson can be used to demonstrate the benefits and capabilities of Artificial Intelligence.
+          <br /><br />
+          Every day, at midnight, we trawl through hundreds of Tweets and use IBM Watson to analyse them.
+          <br /><br />
         </Text>
-        <Attribution/>
+        <Attribution />
       </Box>
     </Box>
   );
