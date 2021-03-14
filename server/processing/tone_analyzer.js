@@ -143,6 +143,8 @@ async function getTone (text, useSentences = false) {
       const result = await toneAnalyzer.tone(toneParams)
       return result
     } catch (err) {
+      console.log('Error fetching tones:')
+      console.log(err)
       if (err.code !== 403) {
         // Failed for unknown reason
         return undefined
@@ -159,10 +161,10 @@ async function getTone (text, useSentences = false) {
 function tryNextToneAnalyzer () {
   toneAnalyzerIndex += 1
   if (toneAnalyzerIndex + 1 > apikeys.length) {
-    console.log("No more analysers")
+    console.log('No more analysers')
     toneAnalyzer = undefined
   } else {
-    console.log("Using next analyser")
+    console.log('Using next analyser')
     toneAnalyzer = new ToneAnalyzerV3({
       version: '2017-09-21',
       authenticator: new IamAuthenticator({

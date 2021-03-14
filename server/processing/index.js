@@ -59,17 +59,21 @@ async function refresh () {
         fear.push(emotions.fear)
         anger.push(emotions.anger)
         sadness.push(emotions.sadness)
-        const sentenceCount = Object.is(result.count, undefined) ? 0 : result.count
-        weights.push(sentenceCount)
+        const sentenceCount = Object.is(result.count, undefined) ? 1 : result.count
+        if (sentenceCount > 0) {
+          weights.push(sentenceCount)
 
-        const addedSettlement = await Settlement.create({
-          name: settlement.name,
-          sentenceCount: sentenceCount,
-          tweetCount: tweets.length,
-          emotions: emotions
-        })
+          const addedSettlement = await Settlement.create({
+            name: settlement.name,
+            sentenceCount: sentenceCount,
+            tweetCount: tweets.length,
+            emotions: emotions
+          })
 
-        settlementIds.push(addedSettlement._id)
+          settlementIds.push(addedSettlement._id)
+        } else {
+          console.error(`Did not find any tweets for ${settlement.name}`)
+        }
       } catch (error) {
         console.error(`Could not process settlement ${settlement.name}`)
       }
