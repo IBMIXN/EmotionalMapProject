@@ -140,7 +140,7 @@ async function getTone (text, useSentences = false) {
         contentType: 'application/json',
         sentences: useSentences
       }
-      const result = await toneAnalyzer.tone(toneParams)
+      const result = await toneAnalyzer.tone(toneParams).result
       return result
     } catch (err) {
       console.log('Error fetching tones:')
