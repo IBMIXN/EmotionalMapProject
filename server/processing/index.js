@@ -1,6 +1,6 @@
 import getTweets from './tweets.js'
 import fs from 'fs' // used to write JSON files for Tweets and hashtags.
-import analyseTweets from './tone_analyzer.js'
+import analyseTweets, { initialiseToneAnalyzer } from './tone_analyzer.js'
 import Settlement from '../models/settlement.js'
 import County from '../models/county.js'
 import Hashtag from '../models/hashtag.js'
@@ -28,6 +28,7 @@ async function refresh () {
   await Settlement.deleteMany({})
   await Hashtag.deleteMany({})
 
+  initialiseToneAnalyzer()
   for (const [county, settlements] of Object.entries(counties)) {
     const numberOfSettlements = settlements.length
     console.log(`Processing county ${county} with ${numberOfSettlements} settlements`)

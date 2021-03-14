@@ -83,7 +83,6 @@ app.get('/breakdown', async (req, res) => {
       sadness: 0
     })
   }
- 
 })
 
 app.get('/refresh', async (req, res) => {

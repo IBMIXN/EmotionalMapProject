@@ -2,16 +2,11 @@
 import ToneAnalyzerV3 from 'ibm-watson/tone-analyzer/v3.js'
 import { IamAuthenticator } from 'ibm-watson/auth/index.js'
 
-const apikey = process.env.TONE_ANALYZER_KEY
-const url = process.env.TONE_ANALYZER_URL
+const apikeys = process.env.TONE_ANALYZER_KEYS.split(',')
+const urls = process.env.TONE_ANALYZER_URLS.split(',')
 
-const toneAnalyzer = new ToneAnalyzerV3({
-  version: '2017-09-21',
-  authenticator: new IamAuthenticator({
-    apikey: apikey
-  }),
-  serviceUrl: url
-})
+let toneAnalyzer
+let toneAnalyzerIndex = 0
 
 const linkPattern = /https?:\/\/[\S]*/ // Catches links; while these are almost always t.co links we need to be careful
 const hashtagPattern = /[@#][\S]*/ // Catches #hashtags and @Mentions
@@ -138,22 +133,53 @@ async function analyseTweets (tweets, useSentences = false) {
 };
 
 async function getTone (text, useSentences = false) {
-  // Returns the raw tones present in some text.
-  const toneParams = {
-    toneInput: { text: text },
-    contentType: 'application/json',
-    sentences: useSentences
+  while (true) {
+    try {
+      const toneParams = {
+        toneInput: { text: text },
+        contentType: 'application/json',
+        sentences: useSentences
+      }
+      const result = await toneAnalyzer.tone(toneParams)
+      return result
+    } catch (err) {
+      if (err.code !== 403) {
+        // Failed for unknown reason
+        return undefined
+      } else {
+        tryNextToneAnalyzer()
+        if (toneAnalyzer === undefined) {
+          return undefined
+        }
+      }
+    }
   }
+}
 
-  const result = await toneAnalyzer.tone(toneParams)
-    .then(toneAnalysis => {
-      return toneAnalysis.result
+function tryNextToneAnalyzer () {
+  toneAnalyzerIndex += 1
+  if (toneAnalyzerIndex + 1 > apikeys.length) {
+    toneAnalyzer = undefined
+  } else {
+    toneAnalyzer = new ToneAnalyzerV3({
+      version: '2017-09-21',
+      authenticator: new IamAuthenticator({
+        apikey: apikeys[toneAnalyzerIndex]
+      }),
+      serviceUrl: urls[toneAnalyzerIndex]
     })
-    .catch(err => {
-      console.log('error:', err)
-    })
-  return result
-};
+  }
+}
+function initialiseToneAnalyzer () {
+  toneAnalyzerIndex = 0
+  toneAnalyzer = new ToneAnalyzerV3({
+    version: '2017-09-21',
+    authenticator: new IamAuthenticator({
+      apikey: apikeys[toneAnalyzerIndex]
+    }),
+    serviceUrl: urls[toneAnalyzerIndex]
+  })
+}
 
 function extractTones (toneData, useSentences = false) {
   // Extracts the raw tones from some tone data.
@@ -239,5 +265,7 @@ function getNumTweetsFromTones (toneData) {
   }
   return tweetCounter
 }
+
+export { initialiseToneAnalyzer }
 
 export default analyseTweets
