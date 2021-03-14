@@ -41,7 +41,7 @@ const InformationBox = (props: InformationBoxProps): JSX.Element => {
     <Box mb="1">{selectionHeader()}
     </Box>
     {props.selectedCounty.settlements.map((settlement) => {
-      const title = `${settlement.name} (s: ${settlement.sentenceCount} t: ${settlement.tweetCount})`
+      const title = `${settlement.name}`
       if (props.view === View.STRONGEST) {
         const maxKey = Object.entries(settlement.emotions).reduce((a, b) => a[1] > b[1] ? a : b)[0]
         switch (maxKey) {
