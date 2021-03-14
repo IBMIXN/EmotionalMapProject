@@ -68,12 +68,22 @@ app.get('/breakdown', async (req, res) => {
       }
     }
   }])
-  res.json({
-    joy: breakdown[0].joy,
-    fear: breakdown[0].fear,
-    anger: breakdown[0].anger,
-    sadness: breakdown[0].sadness
-  })
+  if (breakdown[0]) {
+    res.json({
+      joy: breakdown[0].joy,
+      fear: breakdown[0].fear,
+      anger: breakdown[0].anger,
+      sadness: breakdown[0].sadness
+    })
+  } else {
+    res.json({
+      joy: 0,
+      fear: 0,
+      anger: 0,
+      sadness: 0
+    })
+  }
+ 
 })
 
 app.get('/refresh', async (req, res) => {
