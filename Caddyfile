@@ -1,3 +1,7 @@
+www.emotionmap.uk {
+    redir https://emotionmap.uk{uri}
+}
+
 emotionmap.uk {
   # Route all api calls to express server
   route /api* {
