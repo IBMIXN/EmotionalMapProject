@@ -1,4 +1,4 @@
-import {  Flex,  GridItem, SimpleGrid } from "@chakra-ui/react";
+import {  Flex,  GridItem, SimpleGrid, useColorModeValue } from "@chakra-ui/react";
 import * as React from "react";
 import Leaderboard from "./leaderboard";
 import Pie from "./pie";
@@ -6,11 +6,14 @@ import Trending from "./trending";
 import Map from "../map";
 
 export const Stats = (): JSX.Element => {
+  const bg = useColorModeValue("white", "gray.900");
+
   return (
     <SimpleGrid
       gap={4}
-      pb={4}
+      p={4}
       columns={[1, null, 2]}
+      backgroundColor={bg}
     >
       <GridItem >
 

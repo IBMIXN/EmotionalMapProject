@@ -11,11 +11,11 @@ export const App = (): JSX.Element => {
   const bg = useColorModeValue("white", "gray.900");
 
   if (showSidebar) {
-    return <Flex h="100vh" backgroundColor={bg}>
+    return <Flex h="100vh" >
       <Box w="350px" h="100%" style={{ position: 'fixed' }} boxShadow="xl">
         <Sidebar />
       </Box>
-      <Box flex="1" h="100%" p={4} ml="350px">
+      <Box flex="1" h="100%" ml="350px">
         <Switch>
           <Route exact path="/">
             <Map onClickEnabled={true} />

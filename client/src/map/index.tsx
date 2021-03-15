@@ -135,7 +135,7 @@ export const Map = (props: MapProps): JSX.Element => {
               center: [1.5, 55.2],
               rotate: [4.4, 0, 0],
               parallels: [50, 50],
-              scale: 3300,
+              scale: 3000,
             }}
           >
             <ZoomableGroup>
