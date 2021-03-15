@@ -54,13 +54,12 @@ async function refresh () {
           fear: result.fear
         }
         console.log(`Received ${JSON.stringify(emotions)} for ${county} : ${settlement.name}`)
-
-        joy.push(emotions.joy)
-        fear.push(emotions.fear)
-        anger.push(emotions.anger)
-        sadness.push(emotions.sadness)
         const sentenceCount = Object.is(result.count, undefined) ? 1 : result.count
         if (sentenceCount > 0) {
+          joy.push(emotions.joy)
+          fear.push(emotions.fear)
+          anger.push(emotions.anger)
+          sadness.push(emotions.sadness)
           weights.push(sentenceCount)
 
           const addedSettlement = await Settlement.create({
