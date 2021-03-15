@@ -1,2 +1,2 @@
 /// <reference types="react-scripts" />
-declare module 'geojson-polygon-center';
+declare module 'react-github-fork-ribbon';

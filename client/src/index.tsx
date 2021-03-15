@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import { App } from "./App";
 import store from "./store";
 import theme from "./theme";
+import GitHubForkRibbon from 'react-github-fork-ribbon';
 
 
 ReactDOM.render(
@@ -13,8 +14,14 @@ ReactDOM.render(
     <ColorModeScript />
     <Provider store={store}>
       <BrowserRouter>
-      <ChakraProvider theme={theme}>
-        <App />
+        <ChakraProvider theme={theme}>
+          <App />
+          <GitHubForkRibbon href="https://github.com/IBMIXN/EmotionalMapProject"
+            target="_blank"
+            position="right-bottom"
+            color="black">
+            Fork me on GitHub
+          </GitHubForkRibbon>
         </ChakraProvider>
       </BrowserRouter>
     </Provider>
