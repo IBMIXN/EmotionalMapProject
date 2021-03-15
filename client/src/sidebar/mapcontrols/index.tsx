@@ -88,9 +88,7 @@ export const MapControls = (): JSX.Element => {
           How does it work?
         </Heading>
         <Text>
-          The Emotion Map has been developed to provide an example of how IBM Watson can be used to demonstrate the benefits and capabilities of Artificial Intelligence.
-          <br /><br />
-          Every day, at midnight, we trawl through hundreds of Tweets and use IBM Watson to analyse them.
+          Every day, at midnight, the Emotion Map takes thousands of Tweets and feeds them through IBM Watson Tone Analyser to determine the emotions of the UK. Results are grouped by location so that differences in regions can be visualised on a map.
           <br /><br />
         </Text>
         <Attribution />
