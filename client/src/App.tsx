@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Flex, useBreakpointValue, Container } from "@chakra-ui/react";
+import { Box, Flex, useBreakpointValue, Container, useColorModeValue } from "@chakra-ui/react";
 import Sidebar from "./sidebar";
 import Map from "./map";
 import { Route, Switch } from "react-router-dom";
@@ -8,9 +8,10 @@ import Stats from "./stats";
 
 export const App = (): JSX.Element => {
   const showSidebar = useBreakpointValue({ base: false, md: true }) ?? true;
+  const bg = useColorModeValue("white", "gray.900");
 
   if (showSidebar) {
-    return <Flex h="100vh">
+    return <Flex h="100vh" backgroundColor={bg}>
       <Box w="350px" h="100%" style={{ position: 'fixed' }} boxShadow="xl">
         <Sidebar />
       </Box>
@@ -26,12 +27,13 @@ export const App = (): JSX.Element => {
       </Box>
     </Flex>
   } else {
-    return <Container>
+    return <Container backgroundColor={bg}>
       <Sidebar />
-
       <Switch>
         <Route exact path="/">
+          <Box h="600px">
           <Map onClickEnabled={true} />
+          </Box>
         </Route>
         <Route path="/stats">
           <Stats />

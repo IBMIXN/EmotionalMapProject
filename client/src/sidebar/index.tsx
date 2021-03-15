@@ -19,7 +19,7 @@ export const Sidebar = (): JSX.Element => {
   const { push } = useHistory();
   const location = useLocation();
   const stats: boolean = location.pathname === "/stats";
-  const bg = useColorModeValue("white", "gray.700");
+  const bg = useColorModeValue("white", "gray.800");
 
   return (
     <Flex p={8} bg={bg} height="100%" direction="column">

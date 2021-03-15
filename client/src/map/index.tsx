@@ -1,4 +1,4 @@
-import { Box, Center, Heading, Spinner, Text, useColorModeValue, useTheme } from "@chakra-ui/react";
+import { Box, Center, Heading, Spinner, Text, useBreakpointValue, useColorModeValue, useTheme } from "@chakra-ui/react";
 import { scaleLinear } from "d3-scale";
 import * as React from "react";
 import { useSelector } from "react-redux";
@@ -18,7 +18,9 @@ interface InformationBoxProps {
   emotion: Emotion
 }
 const InformationBox = (props: InformationBoxProps): JSX.Element => {
-  const bg = useColorModeValue("white", "gray.700");
+  const bg = useColorModeValue("white", "gray.800");
+  const mobileMode = useBreakpointValue({ base: true, md: false }) ?? false;
+
 
   const selectionHeader = () => {
     if (props.view === View.STRONGEST) {
@@ -36,39 +38,42 @@ const InformationBox = (props: InformationBoxProps): JSX.Element => {
       }
     }
   }
-  return <Box boxShadow="lg" p="6" rounded="md" bg={bg} style={{ width: "400px", right: "10px", top: "10px", position: "absolute" }}>
+  console.log(mobileMode)
+  return <Box boxShadow="lg" p="6" rounded="md" bg={bg} style={mobileMode ? {bottom: "10px", right: "10px", left: "10px", position: "absolute"
+} : { width: "400px", right: "10px", top: "10px", position: "absolute" }}>
     <Heading mb="2" size="md">{props.selectedCounty.name}</Heading>
     <Box mb="1">{selectionHeader()}
     </Box>
-    {props.selectedCounty.settlements.map((settlement) => {
-      const title = `${settlement.name}`
-      if (props.view === View.STRONGEST) {
-        const maxKey = Object.entries(settlement.emotions).reduce((a, b) => a[1] > b[1] ? a : b)[0]
-        switch (maxKey) {
-          case Emotion.FEAR:
-            return <Text><strong>{title}</strong>: Fear</Text>
-          case Emotion.ANGER:
-            return <Text><strong>{title}</strong>: Anger</Text>
-          case Emotion.SADNESS:
-            return <Text><strong>{title}</strong>: Sadness</Text>
-          default:
-            return <Text><strong>{title}</strong>: Joy</Text>
-        }
-      } else {
-        switch (props.emotion) {
-          case Emotion.FEAR:
-            return <Text><strong>{title}</strong>: {(settlement.emotions.fear * 100).toFixed(0)}%</Text>
-          case Emotion.ANGER:
-            return <Text><strong>{title}</strong>: {(settlement.emotions.anger * 100).toFixed(0)}%</Text>
-          case Emotion.SADNESS:
-            return <Text><strong>{title}</strong>: {(settlement.emotions.sadness * 100).toFixed(0)}%</Text>
-          default:
-            return <Text><strong>{title}</strong>: {(settlement.emotions.joy * 100).toFixed(0)}%</Text>
-        }
+{
+  props.selectedCounty.settlements.map((settlement) => {
+    const title = `${settlement.name}`
+    if (props.view === View.STRONGEST) {
+      const maxKey = Object.entries(settlement.emotions).reduce((a, b) => a[1] > b[1] ? a : b)[0]
+      switch (maxKey) {
+        case Emotion.FEAR:
+          return <Text><strong>{title}</strong>: Fear</Text>
+        case Emotion.ANGER:
+          return <Text><strong>{title}</strong>: Anger</Text>
+        case Emotion.SADNESS:
+          return <Text><strong>{title}</strong>: Sadness</Text>
+        default:
+          return <Text><strong>{title}</strong>: Joy</Text>
       }
-    })
+    } else {
+      switch (props.emotion) {
+        case Emotion.FEAR:
+          return <Text><strong>{title}</strong>: {(settlement.emotions.fear * 100).toFixed(0)}%</Text>
+        case Emotion.ANGER:
+          return <Text><strong>{title}</strong>: {(settlement.emotions.anger * 100).toFixed(0)}%</Text>
+        case Emotion.SADNESS:
+          return <Text><strong>{title}</strong>: {(settlement.emotions.sadness * 100).toFixed(0)}%</Text>
+        default:
+          return <Text><strong>{title}</strong>: {(settlement.emotions.joy * 100).toFixed(0)}%</Text>
+      }
     }
-  </Box>
+  })
+}
+  </Box >
 }
 
 interface MapProps {
@@ -79,6 +84,8 @@ export const Map = (props: MapProps): JSX.Element => {
   const { view, emotion } = useSelector(
     (state: RootState) => state.selectedMap
   );
+
+  const mobileMode = useBreakpointValue({ base: true, md: false }) ?? false;
 
   const [emotionData, setEmotionData] = React.useState<Counties | undefined>(undefined);
   React.useEffect(() => {
@@ -115,7 +122,7 @@ export const Map = (props: MapProps): JSX.Element => {
     return (
       <Box h="100%">
         <div style={{ height: "100%", width: "100%" }}>
-          {(props.onClickEnabled && !selectedCounty) && <Text style={{ width: "400px", right: "10px", top: "10px", position: "absolute" }}>
+          {(props.onClickEnabled && !selectedCounty) && <Text style={mobileMode ? { width: "100%", bottom: "10px", position: "absolute" } : { width: "400px", right: "10px", top: "10px", position: "absolute" }}>
             Click on a county to view a breakdown of settlements
       </Text>}
           <ReactTooltip>{tooltipContent}</ReactTooltip>
