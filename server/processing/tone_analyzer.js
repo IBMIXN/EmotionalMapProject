@@ -105,6 +105,9 @@ async function analyseTweets (tweets, useSentences = false) {
       if (slicedTweets.length <= 1) {
         remainingTweets = false
       }
+      if (numTweets === 0) { // we didn't analyze any tweets. Whoops!
+        remainingTweets = false
+      }
       requestBody = slicedTweets.join(linebreak)
       console.log('ToneAnalyzer: slice length: ' + slicedTweets.length)
       console.log('ToneAnalyzer: tweets found: ' + numTweets)
