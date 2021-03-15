@@ -67,7 +67,7 @@ for (const [county, settlements] of Object.entries(result)) {
 }
 
 // Scale tweets down
-const tweetTotalPerCounty = 300
+const tweetTotalPerCounty = 200
 for (const [county, settlements] of Object.entries(result)) {
     for (let settlement of settlements) {
         settlement.sample_size = Math.floor((settlement.sample_size / countyTotals[county]) * tweetTotalPerCounty)
