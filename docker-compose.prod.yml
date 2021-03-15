@@ -23,6 +23,7 @@ services:
       - "80:80"
     volumes:
       - "./Caddyfile:/etc/caddy/Caddyfile"
+      - ./.caddy:/root/.caddy
     restart: always
   mongodb:
     image: mongo:4.4.4
