@@ -2,6 +2,9 @@
 import { extendTheme } from "@chakra-ui/react"
 
 const overrides = {
+  config: {
+    useSystemColorMode: true,
+  },
   colors: {
     // brand: {
     //   50: "#E8EAF6",
