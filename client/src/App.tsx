@@ -12,10 +12,10 @@ export const App = (): JSX.Element => {
 
   if (showSidebar) {
     return <Flex h="100vh" >
-      <Box w="350px" h="100%" style={{ position: 'fixed' }} boxShadow="xl">
+      <Box w="360px" h="100%" style={{ position: 'fixed' }} boxShadow="xl">
         <Sidebar />
       </Box>
-      <Box flex="1" h="100%" ml="350px">
+      <Box flex="1" h="100%" ml="360px">
         <Switch>
           <Route exact path="/">
             <Map onClickEnabled={true} />

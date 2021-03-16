@@ -15,7 +15,7 @@ export const StatControls = (): JSX.Element => {
     <Box overflow="auto" p={1} pb={8} pt={8}>
       <Box boxShadow="xs" p={4} rounded="lg">
         <Text>
-          <strong>View data for these four emotions</strong>
+          <strong>View statistics for the four emotions.</strong>
           <br />
         </Text>
         <Stack mt={4} direction="row">
@@ -30,7 +30,7 @@ export const StatControls = (): JSX.Element => {
           How does it work?
         </Heading>
         <Text>
-          Every day, at midnight, the Emotion Map takes thousands of Tweets and feeds them through IBM Watson Tone Analyser to determine the emotions of the UK. Results are grouped by location so that differences in regions can be visualised on a map.
+          Every day, at midnight, the Emotion Map takes thousands of Tweets and feeds them through IBM Watson Tone Analyser to determine the emotions of the UK. <br /><br />Results are grouped by location so that differences in regions can be visualised on a map.
 <br /><br />
         </Text>
         <Attribution />

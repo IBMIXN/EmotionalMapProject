@@ -43,7 +43,7 @@ export const MapControls = (): JSX.Element => {
           <TabPanel p={0} mt={6}>
             <Box boxShadow="xs" p={4} rounded="lg">
               <Text mb={4}>
-                <strong>Choose an emotion.</strong>
+                <strong>Choose an emotion for the map.</strong>
                 <br /> The darker the colour, the stronger that emotion.
               </Text>
               <RadioGroup value={emotion} onChange={(value) => dispatch(setEmotion(value as Emotion))}>
@@ -88,7 +88,7 @@ export const MapControls = (): JSX.Element => {
           How does it work?
         </Heading>
         <Text>
-          Every day, at midnight, the Emotion Map takes thousands of Tweets and feeds them through IBM Watson Tone Analyser to determine the emotions of the UK. Results are grouped by location so that differences in regions can be visualised on a map.
+          Every day, at midnight, the Emotion Map takes thousands of Tweets and feeds them through IBM Watson Tone Analyser to determine the emotions of the UK. <br/><br/> Results are grouped by location so that differences in regions can be visualised on a map.
           <br /><br />
         </Text>
         <Attribution />

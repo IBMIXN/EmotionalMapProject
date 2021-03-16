@@ -41,7 +41,7 @@ export const Sidebar = (): JSX.Element => {
         size="lg"
         onClick={() => push(stats ? "/" : "/stats")}
       >
-        {stats ? "Back to Map" : "View Statistics"}
+        {stats ? "Back to Map" : "Statistics Dashboard"}
       </Button>
     </Flex>
   );
