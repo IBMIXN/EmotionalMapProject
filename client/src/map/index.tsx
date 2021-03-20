@@ -38,41 +38,41 @@ const InformationBox = (props: InformationBoxProps): JSX.Element => {
       }
     }
   }
-  console.log(mobileMode)
-  return <Box boxShadow="lg" p="6" rounded="md" bg={bg} style={mobileMode ? {bottom: "10px", right: "10px", left: "10px", position: "absolute"
-} : { width: "400px", right: "10px", top: "10px", position: "absolute" }}>
+  return <Box boxShadow="lg" p="6" rounded="md" bg={bg} style={mobileMode ? {
+    bottom: "10px", right: "10px", left: "10px", position: "absolute"
+  } : { width: "400px", right: "10px", top: "10px", position: "absolute" }}>
     <Heading mb="2" size="md">{props.selectedCounty.name}</Heading>
     <Box mb="1">{selectionHeader()}
     </Box>
-{
-  props.selectedCounty.settlements.map((settlement) => {
-    const title = `${settlement.name}`
-    if (props.view === View.STRONGEST) {
-      const maxKey = Object.entries(settlement.emotions).reduce((a, b) => a[1] > b[1] ? a : b)[0]
-      switch (maxKey) {
-        case Emotion.FEAR:
-          return <Text><strong>{title}</strong>: Fear</Text>
-        case Emotion.ANGER:
-          return <Text><strong>{title}</strong>: Anger</Text>
-        case Emotion.SADNESS:
-          return <Text><strong>{title}</strong>: Sadness</Text>
-        default:
-          return <Text><strong>{title}</strong>: Joy</Text>
-      }
-    } else {
-      switch (props.emotion) {
-        case Emotion.FEAR:
-          return <Text><strong>{title}</strong>: {(settlement.emotions.fear * 100).toFixed(0)}%</Text>
-        case Emotion.ANGER:
-          return <Text><strong>{title}</strong>: {(settlement.emotions.anger * 100).toFixed(0)}%</Text>
-        case Emotion.SADNESS:
-          return <Text><strong>{title}</strong>: {(settlement.emotions.sadness * 100).toFixed(0)}%</Text>
-        default:
-          return <Text><strong>{title}</strong>: {(settlement.emotions.joy * 100).toFixed(0)}%</Text>
-      }
+    {
+      props.selectedCounty.settlements.map((settlement) => {
+        const title = `${settlement.name}`
+        if (props.view === View.STRONGEST) {
+          const maxKey = Object.entries(settlement.emotions).reduce((a, b) => a[1] > b[1] ? a : b)[0]
+          switch (maxKey) {
+            case Emotion.FEAR:
+              return <Text><strong>{title}</strong>: Fear</Text>
+            case Emotion.ANGER:
+              return <Text><strong>{title}</strong>: Anger</Text>
+            case Emotion.SADNESS:
+              return <Text><strong>{title}</strong>: Sadness</Text>
+            default:
+              return <Text><strong>{title}</strong>: Joy</Text>
+          }
+        } else {
+          switch (props.emotion) {
+            case Emotion.FEAR:
+              return <Text><strong>{title}</strong>: {(settlement.emotions.fear * 100).toFixed(0)}%</Text>
+            case Emotion.ANGER:
+              return <Text><strong>{title}</strong>: {(settlement.emotions.anger * 100).toFixed(0)}%</Text>
+            case Emotion.SADNESS:
+              return <Text><strong>{title}</strong>: {(settlement.emotions.sadness * 100).toFixed(0)}%</Text>
+            default:
+              return <Text><strong>{title}</strong>: {(settlement.emotions.joy * 100).toFixed(0)}%</Text>
+          }
+        }
+      })
     }
-  })
-}
   </Box >
 }
 
@@ -115,7 +115,85 @@ export const Map = (props: MapProps): JSX.Element => {
 
   const colourScale = scaleLinear<string>().domain([0, 0.5]).range(["white", colour]);
 
+  const map = (emotionData: Counties) => [britain, northernireland].map((g, index) => {
+    return (
+      <Geographies key={index} geography={g}>
+        {({ geographies }) =>
+          geographies.map((geo) => {
+            const name = geo.properties.NAME || geo.properties.CountyName;
+            const county = emotionData[name]
+            let colour = "#FFFFFF";
+            if (county) {
+              const maxKey = Object.entries(county.emotions).reduce((a, b) => a[1] > b[1] ? a : b)[0]
+              if (view === View.STRONGEST) {
+                switch (maxKey) {
+                  case Emotion.FEAR:
+                    colour = theme.colors.orange[700];
+                    break;
+                  case Emotion.ANGER:
+                    colour = theme.colors.red[700];
+                    break;
+                  case Emotion.SADNESS:
+                    colour = theme.colors.blue[700];
+                    break;
+                  default:
+                    colour = theme.colors.green[700];
+                    break;
+                }
+              } else {
+                switch (emotion) {
+                  case Emotion.FEAR:
+                    colour = colourScale(county.emotions.fear);
+                    break;
+                  case Emotion.ANGER:
+                    colour = colourScale(county.emotions.anger);
+                    break;
+                  case Emotion.SADNESS:
+                    colour = colourScale(county.emotions.sadness);
+                    break;
+                  default:
+                    colour = colourScale(county.emotions.joy);
+                    break;
+                }
+              }
 
+            }
+
+            return (
+              <Geography
+                style={{
+                  default: {
+                    outline: 'none'
+                  },
+                  hover: {
+                    outline: 'none'
+                  },
+                  pressed: {
+                    outline: 'none'
+                  }
+                }}
+                key={geo.rsmKey}
+                geography={geo}
+                onMouseEnter={() => {
+                  setTooltipContent(name);
+                }}
+                onMouseLeave={() => {
+                  setTooltipContent("");
+                }}
+                onClick={() => {
+                  if (props.onClickEnabled)
+                    setSelectedCountyName(name);
+                }}
+                stroke="#aaaaaa"
+                fill={colour}
+              />
+
+            );
+          })
+        }
+      </Geographies>
+    );
+  });
 
   if (emotionData !== undefined) {
     const selectedCounty = emotionData[selectedCountyName]
@@ -138,90 +216,10 @@ export const Map = (props: MapProps): JSX.Element => {
               scale: 3000,
             }}
           >
-            <ZoomableGroup>
+            {mobileMode ? map(emotionData) : <ZoomableGroup>
+              {map(emotionData)}
+            </ZoomableGroup>}
 
-              {/* https://raw.githubusercontent.com/deldersveld/topojson/master/countries/united-kingdom/uk-counties.json */}
-
-              {[britain, northernireland].map((g, index) => {
-                return (
-                  <Geographies key={index} geography={g}>
-                    {({ geographies }) =>
-                      geographies.map((geo) => {
-                        const name = geo.properties.NAME || geo.properties.CountyName;
-                        const county = emotionData[name]
-                        let colour = "#FFFFFF";
-                        if (county) {
-                          const maxKey = Object.entries(county.emotions).reduce((a, b) => a[1] > b[1] ? a : b)[0]
-                          if (view === View.STRONGEST) {
-                            switch (maxKey) {
-                              case Emotion.FEAR:
-                                colour = theme.colors.orange[700];
-                                break;
-                              case Emotion.ANGER:
-                                colour = theme.colors.red[700];
-                                break;
-                              case Emotion.SADNESS:
-                                colour = theme.colors.blue[700];
-                                break;
-                              default:
-                                colour = theme.colors.green[700];
-                                break;
-                            }
-                          } else {
-                            switch (emotion) {
-                              case Emotion.FEAR:
-                                colour = colourScale(county.emotions.fear);
-                                break;
-                              case Emotion.ANGER:
-                                colour = colourScale(county.emotions.anger);
-                                break;
-                              case Emotion.SADNESS:
-                                colour = colourScale(county.emotions.sadness);
-                                break;
-                              default:
-                                colour = colourScale(county.emotions.joy);
-                                break;
-                            }
-                          }
-
-                        }
-
-                        return (
-                          <Geography
-                            style={{
-                              default: {
-                                outline: 'none'
-                              },
-                              hover: {
-                                outline: 'none'
-                              },
-                              pressed: {
-                                outline: 'none'
-                              }
-                            }}
-                            key={geo.rsmKey}
-                            geography={geo}
-                            onMouseEnter={() => {
-                              setTooltipContent(name);
-                            }}
-                            onMouseLeave={() => {
-                              setTooltipContent("");
-                            }}
-                            onClick={() => {
-                              if (props.onClickEnabled)
-                                setSelectedCountyName(name);
-                            }}
-                            stroke="#aaaaaa"
-                            fill={colour}
-                          />
-
-                        );
-                      })
-                    }
-                  </Geographies>
-                );
-              })}
-            </ZoomableGroup>
           </ComposableMap>
         </div>
 
