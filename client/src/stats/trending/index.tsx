@@ -36,7 +36,7 @@ export const Trending = (): JSX.Element => {
           return <Tr key={index}>
             <Td width="10%">{index + 1}</Td>
             <Td>#{hashtag.hashtag}</Td>
-            <Td isNumeric>{hashtag.count}</Td>
+            <Td width="10%" isNumeric>{hashtag.count}</Td>
           </Tr>
         })}
         </Tbody>

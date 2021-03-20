@@ -29,13 +29,13 @@ export const Leaderboard = (): JSX.Element => {
           <Tr>
             <Th></Th>
             <Th>Settlement</Th>
-            <Th>Joy Level</Th>
+            <Th>Joy</Th>
           </Tr>
         </Thead><Tbody>{joyfulSettlements.map((settlement, index) => {
           return <Tr key={index}>
             <Td width="10%">{index + 1}</Td>
             <Td>{settlement.name}</Td>
-            <Td>{(settlement.emotions.joy * 100).toFixed(0)}%</Td>
+            <Td width="10%">{(settlement.emotions.joy * 100).toFixed(0)}%</Td>
           </Tr>
         })}
         </Tbody>
