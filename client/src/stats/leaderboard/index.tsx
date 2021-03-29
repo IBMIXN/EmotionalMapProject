@@ -29,7 +29,7 @@ export const Leaderboard = (): JSX.Element => {
           <Tr>
             <Th></Th>
             <Th>Settlement</Th>
-            <Th>Joy</Th>
+            <Th>Happy</Th>
           </Tr>
         </Thead><Tbody>{joyfulSettlements.map((settlement, index) => {
           return <Tr key={index}>

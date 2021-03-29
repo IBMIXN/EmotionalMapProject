@@ -19,10 +19,10 @@ export const StatControls = (): JSX.Element => {
           <br />
         </Text>
         <Stack mt={4} direction="row">
-          <Badge colorScheme="green">Joy</Badge>
-          <Badge colorScheme="orange">Fear</Badge>
-          <Badge colorScheme="red">Anger</Badge>
-          <Badge colorScheme="blue">Sadness</Badge>
+          <Badge colorScheme="green">Happy</Badge>
+          <Badge colorScheme="orange">Concern</Badge>
+          <Badge colorScheme="red">Impassioned</Badge>
+          <Badge colorScheme="blue">Pensive</Badge>
         </Stack>
       </Box>
       <Box>

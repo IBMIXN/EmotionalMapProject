@@ -49,16 +49,16 @@ export const MapControls = (): JSX.Element => {
               <RadioGroup value={emotion} onChange={(value) => dispatch(setEmotion(value as Emotion))}>
                 <Stack>
                   <Radio size="lg" value={Emotion.JOY} colorScheme="green">
-                    <Badge colorScheme={emotion === Emotion.JOY ? "green" : "default"}>Joy</Badge>
+                    <Badge colorScheme={emotion === Emotion.JOY ? "green" : "default"}>Happy</Badge>
                   </Radio>
                   <Radio size="lg" value={Emotion.FEAR} colorScheme="orange">
-                    <Badge colorScheme={emotion === Emotion.FEAR ? "orange" : "default"}>Fear</Badge>
+                    <Badge colorScheme={emotion === Emotion.FEAR ? "orange" : "default"}>Concern</Badge>
                   </Radio>
                   <Radio size="lg" value={Emotion.ANGER} colorScheme="red">
-                    <Badge colorScheme={emotion === Emotion.ANGER ? "red" : "default"}>Anger</Badge>
+                    <Badge colorScheme={emotion === Emotion.ANGER ? "red" : "default"}>Impassioned</Badge>
                   </Radio>
                   <Radio size="lg" value={Emotion.SADNESS} colorScheme="blue">
-                    <Badge colorScheme={emotion === Emotion.SADNESS ? "blue" : "default"}>Sadness</Badge>
+                    <Badge colorScheme={emotion === Emotion.SADNESS ? "blue" : "default"}>Pensive</Badge>
                   </Radio>
                 </Stack>
               </RadioGroup>
@@ -73,10 +73,10 @@ export const MapControls = (): JSX.Element => {
                 <br />
               </Text>
               <Stack mt={4} direction="row">
-                <Badge colorScheme="green">Joy</Badge>
-                <Badge colorScheme="orange">Fear</Badge>
-                <Badge colorScheme="red">Anger</Badge>
-                <Badge colorScheme="blue">Sadness</Badge>
+                <Badge colorScheme="green">Happy</Badge>
+                <Badge colorScheme="orange">Concern</Badge>
+                <Badge colorScheme="red">Impassioned</Badge>
+                <Badge colorScheme="blue">Pensive</Badge>
               </Stack>
             </Box>
           </TabPanel>
