@@ -1,4 +1,4 @@
-import { Box, Center, Flex, GridItem, SimpleGrid, Text, useBreakpointValue, useColorModeValue } from "@chakra-ui/react";
+import { Box, Flex, GridItem, SimpleGrid, Text, useBreakpointValue, useColorModeValue } from "@chakra-ui/react";
 import * as React from "react";
 import Leaderboard from "./leaderboard";
 import Pie from "./pie";

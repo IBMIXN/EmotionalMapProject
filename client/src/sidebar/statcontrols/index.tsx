@@ -1,10 +1,11 @@
 import * as React from "react";
 import {
   Box,
-  Stack,
   Text,
   Heading,
   Badge,
+  WrapItem,
+  Wrap,
 } from "@chakra-ui/react";
 import Attribution from "../attribution";
 
@@ -18,12 +19,21 @@ export const StatControls = (): JSX.Element => {
           <strong>View statistics for the four emotions.</strong>
           <br />
         </Text>
-        <Stack mt={4} direction="row">
-          <Badge colorScheme="green">Happy</Badge>
-          <Badge colorScheme="orange">Concern</Badge>
-          <Badge colorScheme="red">Impassioned</Badge>
-          <Badge colorScheme="blue">Pensive</Badge>
-        </Stack>
+        <Wrap mt={4} >
+          <WrapItem >
+            <Badge colorScheme="green">Happy</Badge>
+          </WrapItem>
+          <WrapItem>
+            <Badge colorScheme="orange">Concern</Badge>
+          </WrapItem>
+          <WrapItem>
+
+            <Badge colorScheme="red">Impassioned</Badge>
+          </WrapItem>
+          <WrapItem>
+            <Badge colorScheme="blue">Pensive</Badge>
+          </WrapItem>
+        </Wrap>
       </Box>
       <Box>
         <Heading as="h4" size="md" textAlign="center" mt={8} mb={2}>

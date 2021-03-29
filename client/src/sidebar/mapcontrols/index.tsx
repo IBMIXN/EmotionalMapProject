@@ -12,6 +12,8 @@ import {
   Text,
   Heading,
   Badge,
+  Wrap,
+  WrapItem,
 } from "@chakra-ui/react";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -72,12 +74,21 @@ export const MapControls = (): JSX.Element => {
                 The strongest emotion for each region is shown on the map.
                 <br />
               </Text>
-              <Stack mt={4} direction="row">
-                <Badge colorScheme="green">Happy</Badge>
-                <Badge colorScheme="orange">Concern</Badge>
-                <Badge colorScheme="red">Impassioned</Badge>
-                <Badge colorScheme="blue">Pensive</Badge>
-              </Stack>
+              <Wrap mt={4} >
+                <WrapItem >
+                  <Badge colorScheme="green">Happy</Badge>
+                </WrapItem>
+                <WrapItem>
+                  <Badge colorScheme="orange">Concern</Badge>
+                </WrapItem>
+                <WrapItem>
+
+                  <Badge colorScheme="red">Impassioned</Badge>
+                </WrapItem>
+                <WrapItem>
+                  <Badge colorScheme="blue">Pensive</Badge>
+                </WrapItem>
+              </Wrap>
             </Box>
           </TabPanel>
         </TabPanels>
@@ -88,7 +99,7 @@ export const MapControls = (): JSX.Element => {
           How does it work?
         </Heading>
         <Text>
-          Every day, at midnight, the Emotion Map takes thousands of Tweets and feeds them through IBM Watson Tone Analyser to determine the emotions of the UK. <br/><br/> Results are grouped by location so that differences in regions can be visualised on a map.
+          Every day, at midnight, the Emotion Map takes thousands of Tweets and feeds them through IBM Watson Tone Analyser to determine the emotions of the UK. <br /><br /> Results are grouped by location so that differences in regions can be visualised on a map.
           <br /><br />
         </Text>
         <Attribution />
