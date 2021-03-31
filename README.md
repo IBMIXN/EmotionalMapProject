@@ -32,3 +32,11 @@ docker-compose -f docker-compose.prod.yml down
 ```
 
 Whilst learning how to use Docker with docker-compose, the repository [mrcoles/node-react-docker-compose](https://github.com/mrcoles/node-react-docker-compose) was found to be a very useful learning tool. In order to further simplify the deployment, Caddy is used to proxy and serve the API over SSL encryption.
+
+## Further Information
+
+UserManual.pdf provides more in-depth information on the system:
+* Comprehensive feature overview
+* Complete deployment walkthrough
+* System maintenance
+* Guidance for further development
