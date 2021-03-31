@@ -41,7 +41,7 @@ export const Pie = (): JSX.Element => {
 
         <Center><Table mt={3} width="80%" variant="unstyled">
           <Tbody>
-            {["Happy", "Concern", "Impassioned", "Pensive"].map((emotion, index) => {
+            {["Happy", "Concerned", "Impassioned", "Pensive"].map((emotion, index) => {
               return <React.Fragment key={emotion}>
                 <Td width="10px" style={{ padding: 0 }}>
                   <Icon viewBox="0 0 200 200" color={colours[index]}>

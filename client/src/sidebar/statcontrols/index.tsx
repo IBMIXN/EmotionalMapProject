@@ -24,7 +24,7 @@ export const StatControls = (): JSX.Element => {
             <Badge colorScheme="green">Happy</Badge>
           </WrapItem>
           <WrapItem>
-            <Badge colorScheme="orange">Concern</Badge>
+            <Badge colorScheme="orange">Concerned</Badge>
           </WrapItem>
           <WrapItem>
 

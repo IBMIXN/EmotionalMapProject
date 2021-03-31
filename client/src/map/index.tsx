@@ -28,7 +28,7 @@ const InformationBox = (props: InformationBoxProps): JSX.Element => {
     } else {
       switch (props.emotion) {
         case Emotion.FEAR:
-          return <Text>Concern levels for each settlement (overall: {(props.selectedCounty.emotions.fear * 100).toFixed(0)}%)</Text>
+          return <Text>Concerned levels for each settlement (overall: {(props.selectedCounty.emotions.fear * 100).toFixed(0)}%)</Text>
         case Emotion.ANGER:
           return <Text>Impassioned levels for each settlement (overall: {(props.selectedCounty.emotions.anger * 100).toFixed(0)}%)</Text>
         case Emotion.SADNESS:
@@ -51,7 +51,7 @@ const InformationBox = (props: InformationBoxProps): JSX.Element => {
           const maxKey = Object.entries(settlement.emotions).reduce((a, b) => a[1] > b[1] ? a : b)[0]
           switch (maxKey) {
             case Emotion.FEAR:
-              return <Text><strong>{title}</strong>: Concern</Text>
+              return <Text><strong>{title}</strong>: Concerned</Text>
             case Emotion.ANGER:
               return <Text><strong>{title}</strong>: Impassioned</Text>
             case Emotion.SADNESS:

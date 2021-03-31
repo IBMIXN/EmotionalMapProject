@@ -54,7 +54,7 @@ export const MapControls = (): JSX.Element => {
                     <Badge colorScheme={emotion === Emotion.JOY ? "green" : "default"}>Happy</Badge>
                   </Radio>
                   <Radio size="lg" value={Emotion.FEAR} colorScheme="orange">
-                    <Badge colorScheme={emotion === Emotion.FEAR ? "orange" : "default"}>Concern</Badge>
+                    <Badge colorScheme={emotion === Emotion.FEAR ? "orange" : "default"}>Concerned</Badge>
                   </Radio>
                   <Radio size="lg" value={Emotion.ANGER} colorScheme="red">
                     <Badge colorScheme={emotion === Emotion.ANGER ? "red" : "default"}>Impassioned</Badge>
@@ -79,7 +79,7 @@ export const MapControls = (): JSX.Element => {
                   <Badge colorScheme="green">Happy</Badge>
                 </WrapItem>
                 <WrapItem>
-                  <Badge colorScheme="orange">Concern</Badge>
+                  <Badge colorScheme="orange">Concerned</Badge>
                 </WrapItem>
                 <WrapItem>
 
