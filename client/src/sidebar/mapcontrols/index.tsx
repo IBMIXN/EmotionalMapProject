@@ -99,7 +99,7 @@ export const MapControls = (): JSX.Element => {
           How does it work?
         </Heading>
         <Text>
-          Every day, at midnight, the Emotion Map takes thousands of Tweets and feeds them through IBM Watson Tone Analyser to determine the emotions of the UK. <br /><br /> Results are grouped by location so that differences in regions can be visualised on a map.
+          Every day, at midnight, the Emotion Map takes thousands of Tweets and feeds them through IBM Watson Tone Analyzer to determine the emotions of the UK. <br /><br /> Results are grouped by location so that differences in regions can be visualised on a map.
           <br /><br />
         </Text>
         <Attribution />

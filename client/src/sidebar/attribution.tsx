@@ -12,6 +12,8 @@ export const Attribution = (): JSX.Element => {
             <a href="https://www.ibm.com/watson/services/tone-analyzer/"> <Text mt={2} fontSize="xs" as="u">IBM Watson Tone Analyzer</Text></a>
             <br />
             <a href="https://github.com/IBMIXN/EmotionalMapProject"> <Text mt={2} fontSize="xs">Code available on GitHub</Text></a>
+            <br/>
+            <Text mt={2} fontSize="xs">This application is a proof of concept to showcase IBM Watson Tone Analyzer: the data presented should not be used to make any decisions and further research should be performed to determine conclusions from displayed information.</Text>
         </React.Fragment>
     );
 };
