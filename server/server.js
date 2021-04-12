@@ -25,9 +25,19 @@ connectDb().then(() => {
   })
 
   // Schedule getTweets every day at midnight
-  schedule.scheduleJob('0 0 * * *', () => {
+
+  // Using cron-style
+  // schedule.scheduleJob('0 0 * * *', () => {
+  //   refresh()
+  // })
+
+  const rule = new schedule.RecurrenceRule()
+  rule.hour = 0
+  rule.tz = 'Europe/London'
+
+  schedule.scheduleJob(rule, function(){
     refresh()
-  })
+  });
 })
 
 // path for accessing emotion data
