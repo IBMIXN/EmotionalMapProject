@@ -85,7 +85,7 @@ app.get('/breakdown', async (req, res) => {
   }
 })
 
-app.get('/refresh', async (req, res) => {
-  refresh()
-  res.send('Refreshing - check logs')
-})
+// app.get('/refresh', async (req, res) => {
+//   refresh()
+//   res.send('Refreshing - check logs')
+// })
