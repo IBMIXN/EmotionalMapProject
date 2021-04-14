@@ -1,6 +1,6 @@
 # Emotional Map Project
 
-The Emotion Map has been developed to provide an example of how IBM Watson can be used to demonstrate the benefits and capabilities of Artificial Intelligence.
+The Emotion Map has been developed by students to provide an example of how IBM Watson can be used to demonstrate the benefits and capabilities of Artificial Intelligence.
 
 By combining multiple IBM technologies with geospatial data, we have been able to produce a (near) real-time map of the UK that visualises the proportion of four key emotions (joy, fear, anger and sadness) in the countries' Tweets. Twitter was chosen as our data source, since it provides a comprehensive API. Other social media networks, including Facebook, do not provide enough individual geospatial data for meaningful analysis. 
 
