@@ -13,6 +13,10 @@ services:
     depends_on:
       - mongodb
     restart: always
+    logging:
+      driver: "json-file"
+      options:
+          max-size: "10m"
 
   caddy:
     build: 
@@ -25,6 +29,11 @@ services:
       - "./Caddyfile:/etc/caddy/Caddyfile"
       - ./.caddy:/root/.caddy
     restart: always
+    logging:
+      driver: "json-file"
+      options:
+          max-size: "10m"
+
   mongodb:
     image: mongo:4.4.4
     env_file:
@@ -34,6 +43,10 @@ services:
     volumes:
       - mongodb_data:/data/db
     restart: always
+    logging:
+      driver: "json-file"
+      options:
+          max-size: "10m"
 
 volumes:
   mongodb_data:

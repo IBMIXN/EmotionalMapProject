@@ -14,6 +14,10 @@ services:
       - mongodb
     ports:
       - "8080:8080"
+    logging:
+      driver: "json-file"
+      options:
+          max-size: "10m"
     environment:
       NODE_ENV: development
       # HOKIDAR_USEPOLLING: 'true'
@@ -30,6 +34,10 @@ services:
       NODE_ENV: development
     ports:
       - "3000:3000"
+    logging:
+      driver: "json-file"
+      options:
+          max-size: "10m"
   mongodb:
     image: mongo:latest
     env_file:
@@ -38,6 +46,10 @@ services:
       - 27017:27017
     volumes:
       - mongodb_data:/data/db
+    logging:
+      driver: "json-file"
+      options:
+          max-size: "10m"
 
 volumes:
   mongodb_data:
