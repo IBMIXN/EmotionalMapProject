@@ -14,6 +14,7 @@ const weightedMean = (factorsArray, weightsArray) => {
 }
 
 async function refresh () {
+  console.log("Refreshing")
   // Get tweets
   const counties = await fs.promises.readFile('./data/counties.json').then((data, err) => {
     if (err) {
