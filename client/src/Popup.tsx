@@ -8,9 +8,9 @@ export const Popup = (): JSX.Element => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Missing data</ModalHeader>
+          <ModalHeader>Missing data?</ModalHeader>
           <ModalBody>
-            If data is missing from the map please try again later. Please see <Link href="https://github.com/IBMIXN/EmotionalMapProject/issues/4" color="brand.500" isExternal>issue #4</Link> on GitHub for more information.
+            If data is missing from the map please try again tomorrow or get in touch. See <Link href="https://github.com/IBMIXN/EmotionalMapProject/issues/4" color="brand.500" isExternal>issue #4</Link> on GitHub for more information.
           </ModalBody>
 
           <ModalFooter>
