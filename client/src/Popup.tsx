@@ -2,7 +2,7 @@ import * as React from "react";
 import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Link } from "@chakra-ui/react"
 
 export const Popup = (): JSX.Element => {
-  const show = true;
+  const show = false;
   const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen: show })
   return (
       <Modal isOpen={isOpen} onClose={onClose}>
