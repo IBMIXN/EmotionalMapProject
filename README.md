@@ -12,6 +12,9 @@ Map data is provided by [ordnancesurvey.co.uk](https://www.ordnancesurvey.co.uk/
 ## Demonstration
 The web application can be found at [emotionmap.uk](https://www.emotionmap.uk).
 
+## Secrets
+
+In order to run the application, API keys need to be obtained from IBM Watson and Twitter. Please see the attached user manual for instructions on how to complete the .env files.
 ## Deployment
 
 We have set up docker containers for this project.
